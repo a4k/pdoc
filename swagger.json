@@ -2114,7 +2114,7 @@
           "default": [],
           "additionalItems": true,
           "items": {
-            "$ref": "#/definitions/Service"
+            "$ref": "#/definitions/ServiceInfo"
           }
         }
       }
