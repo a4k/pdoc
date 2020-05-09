@@ -2035,7 +2035,6 @@
     "TemplateRoot": {
       "type": "object",
       "title": "Шаблон",
-      "default": {},
       "additionalProperties": true,
       "properties": {
         "ID": {
@@ -2110,7 +2109,6 @@
           "$id": "#/properties/CHILDREN",
           "type": "array",
           "title": "Список дочерних услуг. Неограниченный уровень вложенности услуг",
-          "default": [],
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/ServiceInfo"
