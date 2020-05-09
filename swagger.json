@@ -2331,7 +2331,6 @@
       "properties": {
         "result": {
           "title": "Список статусов",
-          "default": [],
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/StatusRoot"
