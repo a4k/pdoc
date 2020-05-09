@@ -15,8 +15,7 @@
   },
   "basePath": "/api/v1",
   "host": "demo.com",
-  "tags": [
-    {
+  "tags": [{
       "name": "auth",
       "description": "Авторизация"
     },
@@ -33,17 +32,15 @@
       "description": "Статусы"
     }
   ],
-  "x-tagGroups": [
-    {
-      "name": "Endpoints",
-      "tags": [
-        "auth",
-        "departments",
-        "employee",
-        "status"
-      ]
-    }
-  ],
+  "x-tagGroups": [{
+    "name": "Endpoints",
+    "tags": [
+      "auth",
+      "departments",
+      "employee",
+      "status"
+    ]
+  }],
   "schemes": [
     "http",
     "https"
@@ -106,37 +103,35 @@
         ],
         "summary": "Авторизация пользователя",
         "description": "Пароль в явном виде необходим для авторизации через AD",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "required": [
-                "USERNAME",
-                "PASSWORD"
-              ],
-              "properties": {
-                "USERNAME": {
-                  "type": "string",
-                  "title": "Логин пользователя",
-                  "examples": [
-                    "o.kravtsov"
-                  ]
-                },
-                "PASSWORD": {
-                  "type": "string",
-                  "title": "Пароль пользователя",
-                  "examples": [
-                    "MrymSYc83dd668118119eb95eeb7479307d7e8f1"
-                  ]
-                }
+        "parameters": [{
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "required": [
+              "USERNAME",
+              "PASSWORD"
+            ],
+            "properties": {
+              "USERNAME": {
+                "type": "string",
+                "title": "Логин пользователя",
+                "examples": [
+                  "o.kravtsov"
+                ]
+              },
+              "PASSWORD": {
+                "type": "string",
+                "title": "Пароль пользователя",
+                "examples": [
+                  "MrymSYc83dd668118119eb95eeb7479307d7e8f1"
+                ]
               }
             }
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -165,15 +160,13 @@
           "auth"
         ],
         "summary": "Выход пользователя",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "required": true,
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -203,8 +196,7 @@
         ],
         "summary": null,
         "description": "Привязка токена устройства",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "auth",
             "in": "query",
             "description": "Токен авторизации",
@@ -263,15 +255,13 @@
         ],
         "summary": null,
         "description": "Информация о текущем сотруднике",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "required": true,
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -301,8 +291,7 @@
         ],
         "summary": "Информация о сотрудниках",
         "description": "При заданном занчании параметра LAST_SYNC_DATE возвращаются элементы измненные после заданной даты. Параметры кроме auth являються не обязательными",
-        "parameters": [
-          {
+        "parameters": [{
             "in": "body",
             "name": "post",
             "description": "json",
@@ -353,7 +342,7 @@
                   "default": 500,
                   "required": false
                 },
-               "PAGE" :  {
+                "PAGE": {
                   "name": "PAGE",
                   "in": "query",
                   "description": "Номер страницы (начинается с 0)",
@@ -428,7 +417,7 @@
                   "default": 500,
                   "required": false
                 },
-                "PAGE" :  {
+                "PAGE": {
                   "name": "PAGE",
                   "in": "query",
                   "description": "Номер страницы (начинается с 0)",
@@ -476,8 +465,7 @@
         ],
         "summary": "Список филиалов",
         "description": "При заданном занчании параметра LAST_SYNC_DATE возвращаются элементы измненные после заданной даты. Параметры кроме auth являються не обязательными",
-        "parameters": [
-          {
+        "parameters": [{
             "in": "body",
             "name": "post",
             "description": "json",
@@ -501,7 +489,7 @@
                   "default": 500,
                   "required": false
                 },
-                "PAGE" :  {
+                "PAGE": {
                   "name": "PAGE",
                   "in": "query",
                   "description": "Номер страницы (начинается с 0)",
@@ -548,15 +536,13 @@
           "departments"
         ],
         "summary": "Управленческая структура подразделений",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -586,8 +572,7 @@
         ],
         "summary": "Список подразделений по управленческой структуре",
         "description": "При заданном занчании параметра LAST_SYNC_DATE возвращаются элементы измненные после заданной даты. Параметры кроме auth являються не обязательными",
-        "parameters": [
-          {
+        "parameters": [{
             "in": "body",
             "name": "post",
             "description": "json",
@@ -621,7 +606,7 @@
                   "default": 500,
                   "required": false
                 },
-                "PAGE" :  {
+                "PAGE": {
                   "name": "PAGE",
                   "in": "query",
                   "description": "Номер страницы (начинается с 0)",
@@ -669,15 +654,13 @@
           "departments"
         ],
         "summary": "Организационная структура подразделений",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -707,8 +690,7 @@
         ],
         "summary": "Список подразделений по организационной структуре",
         "description": "При заданном занчании параметра LAST_SYNC_DATE возвращаются элементы измненные после заданной даты. Параметры кроме auth являються не обязательными.",
-        "parameters": [
-          {
+        "parameters": [{
             "in": "body",
             "name": "post",
             "description": "json",
@@ -741,7 +723,7 @@
                   "default": 500,
                   "required": false
                 },
-                "PAGE" :  {
+                "PAGE": {
                   "name": "PAGE",
                   "in": "query",
                   "description": "Номер страницы (начинается с 0)",
@@ -789,15 +771,13 @@
           "status"
         ],
         "summary": "Список статусов заявлений и заявок согласно проектным решениям",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -826,15 +806,13 @@
           "status"
         ],
         "summary": "Список типов статусов",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -863,15 +841,13 @@
           "status"
         ],
         "summary": "Список шаблонов",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -900,15 +876,13 @@
           "status"
         ],
         "summary": "Список типов шаблонов",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -937,15 +911,13 @@
           "status"
         ],
         "summary": "Список дерева услуг",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -974,15 +946,13 @@
           "status"
         ],
         "summary": "Список доступных заявок на справки",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -1011,8 +981,7 @@
           "status"
         ],
         "summary": "Оформление заявки в справках АХО, IT-поддержка и другие",
-        "parameters": [
-          {
+        "parameters": [{
             "in": "body",
             "name": "post",
             "description": "json",
@@ -1047,7 +1016,7 @@
                   ],
                   "required": true
                 },
-                "FILE" :  {
+                "FILE": {
                   "name": "FILE",
                   "in": "query",
                   "description": "Файл в base64",
@@ -1094,15 +1063,13 @@
           "status"
         ],
         "summary": "Сгруппированный список типов документов ",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -1186,7 +1153,7 @@
           ]
         },
         "ACTIVE": {
-          "type":  "string",
+          "type": "string",
           "title": "Признак активности",
           "enum": ["Y", "N"],
           "examples": [
@@ -1312,7 +1279,7 @@
           "items": {
             "$ref": "#/definitions/AbsenceInfo"
           }
-        },
+        }
       }
     },
     "UserWithToken": {
@@ -1785,25 +1752,23 @@
       "type": "object",
       "title": "The File Schema",
       "default": {},
-      "examples": [
-        {
-          "~src": false,
-          "MODULE_ID": "main",
-          "DESCRIPTION": "",
-          "CONTENT_TYPE": "image/jpeg",
-          "TIMESTAMP_X": "07.12.2018 12:35:23",
-          "HEIGHT": "2524",
-          "FILE_SIZE": "688900",
-          "ID": "9490",
-          "SUBDIR": "main/8c2",
-          "FILE_NAME": "Глебова Лариса Ивановна.JPG",
-          "ORIGINAL_NAME": "Глебова Лариса Ивановна.JPG",
-          "HANDLER_ID": null,
-          "EXTERNAL_ID": "4d1c82c9971dce03e22f38c8051e93cb",
-          "SRC": "/upload/main/8c2/Глебова Лариса Ивановна.JPG",
-          "WIDTH": "2691"
-        }
-      ],
+      "examples": [{
+        "~src": false,
+        "MODULE_ID": "main",
+        "DESCRIPTION": "",
+        "CONTENT_TYPE": "image/jpeg",
+        "TIMESTAMP_X": "07.12.2018 12:35:23",
+        "HEIGHT": "2524",
+        "FILE_SIZE": "688900",
+        "ID": "9490",
+        "SUBDIR": "main/8c2",
+        "FILE_NAME": "Глебова Лариса Ивановна.JPG",
+        "ORIGINAL_NAME": "Глебова Лариса Ивановна.JPG",
+        "HANDLER_ID": null,
+        "EXTERNAL_ID": "4d1c82c9971dce03e22f38c8051e93cb",
+        "SRC": "/upload/main/8c2/Глебова Лариса Ивановна.JPG",
+        "WIDTH": "2691"
+      }],
       "additionalProperties": true,
       "required": [
         "ID",
@@ -2151,7 +2116,7 @@
           "items": {
             "$ref": "#/definitions/Service"
           }
-        },
+        }
       }
     },
     "ServiceInfo": {
@@ -2221,7 +2186,7 @@
           "items": {
             "$ref": "#/definitions/ApplicationInfo"
           }
-        },
+        }
       }
     },
     "ApplicationInfo": {
