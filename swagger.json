@@ -800,41 +800,6 @@
         }
       }
     },
-    "/status.types": {
-      "post": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Список типов статусов",
-        "parameters": [{
-          "name": "auth",
-          "in": "query",
-          "description": "Токен авторизации",
-          "type": "string",
-          "required": true
-        }],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/StatusTypeInfoResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
     "/template.list": {
       "post": {
         "tags": [
@@ -853,41 +818,6 @@
             "description": "Успешно",
             "schema": {
               "$ref": "#/definitions/TemplateListResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
-    "/template.types": {
-      "post": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Список типов шаблонов",
-        "parameters": [{
-          "name": "auth",
-          "in": "query",
-          "description": "Токен авторизации",
-          "type": "string",
-          "required": true
-        }],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/TemplateTypeResponse"
             }
           },
           "400": {
@@ -1912,26 +1842,6 @@
         }
       }
     },
-    "StatusTypeInfo": {
-      "type": "object",
-      "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Идентификатор типа статуса",
-          "examples": [
-            769
-          ]
-        },
-        "NAME": {
-          "type": "string",
-          "title": "Название типа статуса",
-          "examples": [
-            "Генератор документа"
-          ]
-        }
-      }
-    },
     "StatusRoot": {
       "type": "object",
       "title": "Статус",
@@ -1969,10 +1879,10 @@
             1525735820
           ]
         },
-        "TYPE": {
-          "$id": "#/properties/TYPE",
+        "TEMPLATE_ID": {
+          "$id": "#/properties/TEMPLATE_ID",
           "type": "integer",
-          "title": "Тип заявки",
+          "title": "Шаблон заявки",
           "examples": [
             1
           ]
@@ -2012,26 +1922,6 @@
         }
       }
     },
-    "TemplateTypeInfo": {
-      "type": "object",
-      "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Идентификатор типа шаблона",
-          "examples": [
-            401
-          ]
-        },
-        "NAME": {
-          "type": "string",
-          "title": "Название типа шаблона",
-          "examples": [
-            "Заявка в АХО"
-          ]
-        }
-      }
-    },
     "TemplateRoot": {
       "type": "object",
       "title": "Шаблон",
@@ -2059,14 +1949,6 @@
           "title": "Позиция при сортировке. чем значение меньше тем запись выше. Если значения равны у записей, сортируются по алфавиту NAME",
           "examples": [
             100
-          ]
-        },
-        "TYPE": {
-          "$id": "#/properties/TYPE",
-          "type": "integer",
-          "title": "Тип шаблона",
-          "examples": [
-            401
           ]
         },
         "NAME": {
@@ -2343,27 +2225,6 @@
         }
       }
     },
-    "StatusTypeInfoResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "title": "Список типов статусов",
-          "type": "array",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/StatusTypeInfo"
-          }
-        },
-        "status": {
-          "type": "string",
-          "default": "ok"
-        },
-        "timestamp": {
-          "type": "integer",
-          "default": 1525735820
-        }
-      }
-    },
     "TemplateListResponse": {
       "type": "object",
       "properties": {
@@ -2372,26 +2233,6 @@
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/TemplateRoot"
-          }
-        },
-        "status": {
-          "type": "string",
-          "default": "ok"
-        },
-        "timestamp": {
-          "type": "integer",
-          "default": 1525735820
-        }
-      }
-    },
-    "TemplateTypeResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "title": "Типы шаблонов документов",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/TemplateTypeInfo"
           }
         },
         "status": {
