@@ -30,6 +30,14 @@
     {
       "name": "status",
       "description": "Статусы"
+    },
+    {
+      "name": "documents",
+      "description": "Документы"
+    },
+    {
+      "name": "tasks",
+      "description": "Задачи"
     }
   ],
   "x-tagGroups": [{
@@ -38,7 +46,9 @@
       "auth",
       "departments",
       "employee",
-      "status"
+      "status",
+      "documents",
+      "tasks"
     ]
   }],
   "schemes": [
@@ -948,14 +958,14 @@
                   "in": "query",
                   "description": "Сотрудники",
                   "type": "array",
-                  "default": [504, 205]
+                  "examples": [504, 205]
                 },
                 "PRODUCTS": {
                   "name": "PRODUCTS",
                   "in": "query",
                   "description": "Товары",
                   "type": "array",
-                  "default": [200, 170]
+                  "examples": [200, 170]
                 },
                 "LOCATION": {
                   "name": "LOCATION",
@@ -977,33 +987,34 @@
                 "FILE": {
                   "name": "FILE",
                   "in": "query",
-                  "description": "Файлы",
+                  "description": "Массив файлов в base64",
                   "type": "array",
-                  "default": ["Файл в base64"]
+                  "examples": ["Файл в base64"]
                 },
                 "APPLICATION_TYPE": {
                   "name": "APPLICATION_TYPE",
                   "in": "query",
                   "type": "string",
-                  "default": "Тип справки"
+                  "description": "Тип справки"
                 },
                 "APPLICATION_QUANTITY": {
                   "name": "APPLICATION_QUANTITY",
                   "in": "query",
                   "type": "string",
-                  "default": "Количество"
+                  "description": "Количество"
                 },
                 "APPLICATION_YEAR": {
                   "name": "APPLICATION_YEAR",
+                  "description": "Год",
                   "in": "query",
                   "type": "array",
-                  "default": [2015, 2019]
+                  "examples": [2015, 2019]
                 },
                 "APPLICATION_PLACE": {
                   "name": "APPLICATION_PLACE",
                   "in": "query",
                   "type": "string",
-                  "default": "Место предьявления справки"
+                  "description": "Место предьявления справки"
                 },
                 "APPLICATION_SALARY": {
                   "name": "APPLICATION_SALARY",
@@ -1019,7 +1030,7 @@
                   "name": "APPLICATION_PERIOD",
                   "in": "query",
                   "type": "string",
-                  "default": "Период"
+                  "description": "Период"
                 },
                 "APPLICATION_SET_PERIOD": {
                   "name": "APPLICATION_SET_PERIOD",
@@ -1042,6 +1053,107 @@
             "required": true
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/StatusOK"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/tasks.list": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Список задач",
+        "description": "",
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/TaskListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/documents.sign": {
+      "post": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Подписать документ",
+        "description": "Можно передать идентификатор документа или задачи",
+        "parameters": [{
+            "in": "body",
+            "name": "post",
+            "description": "json",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "DOCUMENT_ID": {
+                  "name": "DOCUMENT_ID",
+                  "in": "query",
+                  "description": "идентификатор документа",
+                  "type": "integer",
+                  "examples": [
+                    2332
+                  ]
+                },
+                "TASK_ID": {
+                  "name": "TASK_ID",
+                  "in": "query",
+                  "description": "идентификатор задачи",
+                  "type": "integer",
+                  "examples": [
+                    2332
+                  ]
+                }
+              }
+            }
+          },
+          {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -2067,6 +2179,87 @@
         }
       }
     },
+    "TaskRoot": {
+      "type": "object",
+      "title": "Задача",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "integer",
+          "title": "Идентификатор задачи",
+          "examples": [
+            6051
+          ]
+        },
+        "ACTIVE": {
+          "$id": "#/properties/ACTIVE",
+          "type": "string",
+          "title": "Признак активности",
+          "enum": ["Y", "N"],
+          "examples": [
+            "Y"
+          ]
+        },
+        "SORT": {
+          "type": "integer",
+          "title": "Позиция при сортировке. чем значение меньше тем запись выше. Если значения равны у записей, сортируются по алфавиту NAME",
+          "examples": [
+            100
+          ]
+        },
+        "TIMESTAMP_X": {
+          "$id": "#/properties/TIMESTAMP_X",
+          "type": "integer",
+          "title": "Дата изменения элемента",
+          "examples": [
+            1525735820
+          ]
+        },
+        "COMPLETED": {
+          "$id": "#/properties/COMPLETED",
+          "type": "string",
+          "title": "Завершена",
+          "enum": ["Y", "N"],
+          "examples": [
+            "Y"
+          ]
+        },
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Название",
+          "examples": [
+            "Необходимо согласовать заказ визиток"
+          ]
+        },
+        "PREVIEW_TEXT": {
+          "$id": "#/properties/PREVIEW_TEXT",
+          "type": "string",
+          "title": "Краткое описание",
+          "examples": [
+            "Исполнитель 50 шт"
+          ]
+        },
+        "DETAIL_TEXT": {
+          "$id": "#/properties/DETAIL_TEXT",
+          "type": "string",
+          "title": "Полное описание",
+          "examples": [
+            "Ноутбук леново"
+          ]
+        },
+        "FILES": {
+          "$id": "#/properties/FILES",
+          "type": "array",
+          "title": "Файлы в base64",
+          "examples": [
+            "base64"
+          ],
+          "default": ["файл в base64"]
+        }
+      }
+    },
     "UserGetResponse": {
       "type": "object",
       "properties": {
@@ -2232,6 +2425,26 @@
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/ServiceTree"
+          }
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "TaskListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "title": "Список статусов",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/TaskRoot"
           }
         },
         "status": {
