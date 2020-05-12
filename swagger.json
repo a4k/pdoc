@@ -909,7 +909,7 @@
           "status"
         ],
         "summary": "Оформление заявки",
-        "description": "в справках АХО, IT-поддержка и другие. Файл в base64.",
+        "description": "Нужно указать идентификатор шаблона. Файл в base64.",
         "parameters": [{
             "in": "body",
             "name": "post",
@@ -918,6 +918,13 @@
             "schema": {
               "type": "object",
               "properties": {
+                "TEMPLATE_ID": {
+                  "name": "TEMPLATE_ID",
+                  "in": "query",
+                  "description": "Идентификатор шаблона заявки",
+                  "type": "string",
+                  "default": ""
+                },
                 "SERVICE_ID": {
                   "name": "SERVICE_ID",
                   "in": "query",
@@ -926,6 +933,29 @@
                   "examples": [
                     1525735820
                   ]
+                },
+                "DEPARTMENT_ID": {
+                  "name": "DEPARTMENT_ID",
+                  "in": "query",
+                  "description": "Идентификатор филиала",
+                  "type": "integer",
+                  "examples": [
+                    1525735820
+                  ]
+                },
+                "MANAGERS": {
+                  "name": "MANAGERS",
+                  "in": "query",
+                  "description": "Сотрудники",
+                  "type": "array",
+                  "default": [504, 205]
+                },
+                "PRODUCTS": {
+                  "name": "PRODUCTS",
+                  "in": "query",
+                  "description": "Товары",
+                  "type": "array",
+                  "default": [200, 170]
                 },
                 "LOCATION": {
                   "name": "LOCATION",
@@ -942,24 +972,64 @@
                   "type": "integer",
                   "examples": [
                     "Добрый день! Сломался стул"
-                  ],
-                  "required": true
+                  ]
                 },
                 "FILE": {
                   "name": "FILE",
                   "in": "query",
-                  "description": "Файл в base64",
-                  "type": "string",
-                  "default": "",
-                  "required": false
+                  "description": "Файлы",
+                  "type": "array",
+                  "default": ["Файл в base64"]
                 },
-                "TEMPLATE_ID": {
-                  "name": "TEMPLATE_ID",
+                "APPLICATION_TYPE": {
+                  "name": "APPLICATION_TYPE",
                   "in": "query",
-                  "description": "Шаблон заявки",
                   "type": "string",
-                  "default": "",
-                  "required": false
+                  "default": "Тип справки"
+                },
+                "APPLICATION_QUANTITY": {
+                  "name": "APPLICATION_QUANTITY",
+                  "in": "query",
+                  "type": "string",
+                  "default": "Количество"
+                },
+                "APPLICATION_YEAR": {
+                  "name": "APPLICATION_YEAR",
+                  "in": "query",
+                  "type": "array",
+                  "default": [2015, 2019]
+                },
+                "APPLICATION_PLACE": {
+                  "name": "APPLICATION_PLACE",
+                  "in": "query",
+                  "type": "string",
+                  "default": "Место предьявления справки"
+                },
+                "APPLICATION_SALARY": {
+                  "name": "APPLICATION_SALARY",
+                  "in": "query",
+                  "type": "string",
+                  "description": "Указать оклад",
+                  "enum": ["Y", "N"],
+                  "examples": [
+                    "Y"
+                  ]
+                },
+                "APPLICATION_PERIOD": {
+                  "name": "APPLICATION_PERIOD",
+                  "in": "query",
+                  "type": "string",
+                  "default": "Период"
+                },
+                "APPLICATION_SET_PERIOD": {
+                  "name": "APPLICATION_SET_PERIOD",
+                  "in": "query",
+                  "type": "string",
+                  "description": "Указать период оклада",
+                  "enum": ["Y", "N"],
+                  "examples": [
+                    "Y"
+                  ]
                 }
               }
             }
