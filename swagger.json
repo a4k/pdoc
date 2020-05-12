@@ -908,8 +908,8 @@
         "tags": [
           "status"
         ],
-        "summary": "Оформление заявки в справках АХО, IT-поддержка и другие",
-        "description": "Файл в base64.",
+        "summary": "Оформление заявки",
+        "description": "в справках АХО, IT-поддержка и другие. Файл в base64.",
         "parameters": [{
             "in": "body",
             "name": "post",
