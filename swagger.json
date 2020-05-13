@@ -1819,13 +1819,7 @@
           "default": 1
         },
         "PATTERN": {
-          "$id": "#/properties/PATTERN",
-          "type": "object",
-          "title": "Шаблон документа DocumentPattern",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/DocumentPattern"
-          }
+          "$ref": "#/definitions/DocumentPattern"
         },
         "STATUS": {
           "$id": "#/properties/STATUS",
