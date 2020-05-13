@@ -1948,7 +1948,7 @@
           "title": "Массив опций для поля",
           "additionalItems": true,
           "items": {
-            "$ref": "#/definitions/DocumentPatternField"
+            "$ref": "#/definitions/DocumentOptionField"
           }
         }
       }
