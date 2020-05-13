@@ -28,10 +28,6 @@
       "description": "Сотрудники"
     },
     {
-      "name": "status",
-      "description": "Статусы"
-    },
-    {
       "name": "document",
       "description": "Документы"
     },
@@ -46,7 +42,6 @@
       "auth",
       "departments",
       "employee",
-      "status",
       "document",
       "task"
     ]
