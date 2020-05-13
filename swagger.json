@@ -1941,6 +1941,38 @@
           "title": "Массив доступных значений поля, может быть пустым",
           "additionalItems": true,
           "default": []
+        },
+        "OPTION_VALUES": {
+          "$id": "#/properties/OPTION_VALUES",
+          "type": "array",
+          "title": "Массив опций для поля",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentPatternField"
+          }
+        }
+      }
+    },
+    "DocumentOptionField": {
+      "type": "object",
+      "title": "Поле опций поля документа DocumentOptionField",
+      "additionalProperties": true,
+      "properties": {
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип опции поля",
+          "default": "",
+          "description": "Доступные значения defaultValue, errorValue, minValue, maxValue, rowValue, colValue, noteValue, regexpValue, enableTime, multiple(true, false), required (true, false)",
+          "examples": [
+            "defaultValue", "errorValue", "minValue", "maxValue", "rowValue", "colValue", "noteValue", "regexpValue", "multiple", "required"
+          ]
+        },
+        "VALUE": {
+          "$id": "#/properties/VALUE",
+          "type": "string",
+          "title": "Значение опции. Обычная строка",
+          "default": ""
         }
       }
     },
