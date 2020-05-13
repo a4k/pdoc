@@ -32,11 +32,11 @@
       "description": "Статусы"
     },
     {
-      "name": "documents",
+      "name": "document",
       "description": "Документы"
     },
     {
-      "name": "tasks",
+      "name": "task",
       "description": "Задачи"
     }
   ],
@@ -47,8 +47,8 @@
       "departments",
       "employee",
       "status",
-      "documents",
-      "tasks"
+      "document",
+      "task"
     ]
   }],
   "schemes": [
@@ -967,6 +967,40 @@
                   "type": "array",
                   "examples": [200, 170]
                 },
+                "BOOK_HOTEL": {
+                  "name": "BOOK_HOTEL",
+                  "in": "query",
+                  "description": "Бронировать гостиницу",
+                  "type": "array",
+                  "enum": ["Y", "N"],
+                  "examples": [
+                    "Y"
+                  ]
+                },
+                "BUSINESS_TRIPS": {
+                  "name": "BUSINESS_TRIPS",
+                  "in": "query",
+                  "description": "Командировки",
+                  "type": "array",
+                  "default": [{
+                    "CODE": "Код проекта",
+                    "LOCATION": "Место назначения",
+                    "ORGANIZATION": "Организация",
+                    "PURPOSE": "Цель поездки"
+                  }]
+                },
+                "START_DATE": {
+                  "name": "START_DATE",
+                  "in": "query",
+                  "type": "string",
+                  "description": "Дата начала"
+                },
+                "END_DATE": {
+                  "name": "END_DATE",
+                  "in": "query",
+                  "type": "string",
+                  "description": "Дата окончания"
+                },
                 "LOCATION": {
                   "name": "LOCATION",
                   "in": "query",
@@ -1075,10 +1109,10 @@
         }
       }
     },
-    "/tasks.list": {
+    "/task.list": {
       "post": {
         "tags": [
-          "tasks"
+          "task"
         ],
         "summary": "Список задач",
         "description": "",
@@ -1111,10 +1145,10 @@
         }
       }
     },
-    "/documents.sign": {
+    "/document.sign": {
       "post": {
         "tags": [
-          "documents"
+          "document"
         ],
         "summary": "Подписать документ",
         "description": "Можно передать идентификатор документа или задачи",
@@ -1159,6 +1193,42 @@
             "description": "Успешно",
             "schema": {
               "$ref": "#/definitions/StatusOK"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/document.categories": {
+      "post": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Список категорий документов",
+        "description": "",
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/DocumentCategoriesResponse"
             }
           },
           "400": {
@@ -2179,6 +2249,93 @@
         }
       }
     },
+    "DocumentCategories": {
+      "type": "object",
+      "title": "Категория документов",
+      "additionalProperties": true,
+      "properties": {
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Название",
+          "default": "Название категории"
+        },
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип категории",
+          "default": "single"
+        },
+        "CONTENT": {
+          "$id": "#/properties/CONTENT",
+          "type": "object",
+          "title": "Содержание категории",
+          "default": {
+            "$ref": "#/definitions/DocumentPattern"
+          }
+        }
+      }
+    },
+    "DocumentPattern": {
+      "type": "object",
+      "title": "Шаблон документа",
+      "additionalProperties": true,
+      "properties": {
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Название",
+          "default": "Название документа"
+        },
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип документа",
+          "default": "request",
+          "examples": [
+            "request", "certificate", "application"
+          ]
+        },
+        "FIELDS": {
+          "$id": "#/properties/FIELDS",
+          "type": "array",
+          "title": "Шаблонные поля документа",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentPatternField"
+          }
+        }
+      }
+    },
+    "DocumentPatternField": {
+      "type": "object",
+      "title": "Поле шаблона документа",
+      "additionalProperties": true,
+      "properties": {
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Название",
+          "default": "Название поля"
+        },
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип поля",
+          "default": "text",
+          "examples": [
+            "string", "text", "number", "flag", "checkBox", "list", "dateTime", "period", "contact"
+          ]
+        },
+        "AVAILABLE_VALUES": {
+          "$id": "#/properties/AVAILABLE_VALUES",
+          "type": "array",
+          "title": "Массив доступных значений",
+          "additionalItems": true,
+          "default": ["example text value"]
+        }
+      }
+    },
     "TaskRoot": {
       "type": "object",
       "title": "Задача",
@@ -2445,6 +2602,26 @@
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/TaskRoot"
+          }
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "DocumentCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "title": "Список категорий документов",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentCategories"
           }
         },
         "status": {
