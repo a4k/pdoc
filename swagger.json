@@ -1820,9 +1820,10 @@
         },
         "PATTERN": {
           "$id": "#/properties/PATTERN",
+          "type": "object",
           "title": "Шаблон документа DocumentPattern",
           "additionalItems": true,
-          "schema": {
+          "items": {
             "$ref": "#/definitions/DocumentPattern"
           }
         },
