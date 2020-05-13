@@ -1820,7 +1820,6 @@
         },
         "PATTERN": {
           "$id": "#/properties/PATTERN",
-          "type": "object",
           "title": "Шаблон документа DocumentPattern",
           "additionalItems": true,
           "schema": {
@@ -1858,7 +1857,7 @@
     },
     "DocumentField": {
       "type": "object",
-      "title": "Поле документы",
+      "title": "Поле документы DocumentField",
       "additionalProperties": true,
       "properties": {
         "ID": {
