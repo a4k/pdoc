@@ -775,376 +775,6 @@
         }
       }
     },
-    "/status.list": {
-      "post": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Список статусов",
-        "description": "",
-        "parameters": [{
-          "name": "auth",
-          "in": "query",
-          "description": "Токен авторизации",
-          "type": "string",
-          "required": true
-        }],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/StatusListResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
-    "/status.template.list": {
-      "post": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Список шаблонов",
-        "parameters": [{
-          "name": "auth",
-          "in": "query",
-          "description": "Токен авторизации",
-          "type": "string",
-          "required": true
-        }],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/TemplateListResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
-    "/status.service.tree": {
-      "post": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Список дерева услуг",
-        "description": "Получение дерева данных по шаблону или элементу - Справки(INQUIRY), Заявления(APPLICATION), АХО (AHO), IT-поддержка (IT)",
-        "parameters": [{
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "SERVICE_TYPE": {
-                  "name": "SERVICE_TYPE",
-                  "in": "query",
-                  "description": "Элемент - Справки(INQUIRY), Заявления(APPLICATION), АХО (AHO), IT-поддержка (IT)",
-                  "type": "string",
-                  "examples": [
-                    "APPLICATION"
-                  ],
-                  "required": false
-                },
-                "TEMPLATE_ID": {
-                  "name": "TEMPLATE_ID",
-                  "in": "query",
-                  "description": "Идентификатор шаблона",
-                  "type": "integer",
-                  "examples": [
-                    1
-                  ],
-                  "required": false
-                }
-              }
-            }
-          },
-          {
-          "name": "auth",
-          "in": "query",
-          "description": "Токен авторизации",
-          "type": "string",
-          "required": true
-        }],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/ServiceTreeResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
-    "/status.form.send": {
-      "post": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Оформление заявки",
-        "description": "Нужно указать идентификатор шаблона. Файл в base64.",
-        "parameters": [{
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "TEMPLATE_ID": {
-                  "name": "TEMPLATE_ID",
-                  "in": "query",
-                  "description": "Идентификатор шаблона заявки",
-                  "type": "string",
-                  "default": ""
-                },
-                "SERVICE_ID": {
-                  "name": "SERVICE_ID",
-                  "in": "query",
-                  "description": "Идентификатор услуги",
-                  "type": "integer",
-                  "examples": [
-                    1525735820
-                  ]
-                },
-                "DEPARTMENT_ID": {
-                  "name": "DEPARTMENT_ID",
-                  "in": "query",
-                  "description": "Идентификатор филиала",
-                  "type": "integer",
-                  "examples": [
-                    1525735820
-                  ]
-                },
-                "MANAGERS": {
-                  "name": "MANAGERS",
-                  "in": "query",
-                  "description": "Сотрудники",
-                  "type": "array",
-                  "examples": [504, 205]
-                },
-                "PRODUCTS": {
-                  "name": "PRODUCTS",
-                  "in": "query",
-                  "description": "Товары",
-                  "type": "array",
-                  "examples": [200, 170]
-                },
-                "BOOK_HOTEL": {
-                  "name": "BOOK_HOTEL",
-                  "in": "query",
-                  "description": "Бронировать гостиницу",
-                  "type": "array",
-                  "enum": ["Y", "N"],
-                  "examples": [
-                    "Y"
-                  ]
-                },
-                "BUSINESS_TRIPS": {
-                  "name": "BUSINESS_TRIPS",
-                  "in": "query",
-                  "description": "Командировки",
-                  "type": "array",
-                  "default": [{
-                    "CODE": "Код проекта",
-                    "LOCATION": "Место назначения",
-                    "ORGANIZATION": "Организация",
-                    "PURPOSE": "Цель поездки"
-                  }]
-                },
-                "START_DATE": {
-                  "name": "START_DATE",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Дата начала"
-                },
-                "END_DATE": {
-                  "name": "END_DATE",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Дата окончания"
-                },
-                "LOCATION": {
-                  "name": "LOCATION",
-                  "in": "query",
-                  "description": "Локация",
-                  "type": "string",
-                  "examples": [
-                    "Этаж 2, офис 207"
-                  ]
-                },
-                "COMMENT": {
-                  "name": "COMMENT",
-                  "description": "Комментарий",
-                  "type": "integer",
-                  "examples": [
-                    "Добрый день! Сломался стул"
-                  ]
-                },
-                "FILE": {
-                  "name": "FILE",
-                  "in": "query",
-                  "description": "Массив файлов в base64",
-                  "type": "array",
-                  "examples": ["Файл в base64"]
-                },
-                "APPLICATION_TYPE": {
-                  "name": "APPLICATION_TYPE",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Тип справки"
-                },
-                "APPLICATION_QUANTITY": {
-                  "name": "APPLICATION_QUANTITY",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Количество"
-                },
-                "APPLICATION_YEAR": {
-                  "name": "APPLICATION_YEAR",
-                  "description": "Год",
-                  "in": "query",
-                  "type": "array",
-                  "examples": [2015, 2019]
-                },
-                "APPLICATION_PLACE": {
-                  "name": "APPLICATION_PLACE",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Место предьявления справки"
-                },
-                "APPLICATION_SALARY": {
-                  "name": "APPLICATION_SALARY",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Указать оклад",
-                  "enum": ["Y", "N"],
-                  "examples": [
-                    "Y"
-                  ]
-                },
-                "APPLICATION_PERIOD": {
-                  "name": "APPLICATION_PERIOD",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Период"
-                },
-                "APPLICATION_SET_PERIOD": {
-                  "name": "APPLICATION_SET_PERIOD",
-                  "in": "query",
-                  "type": "string",
-                  "description": "Указать период оклада",
-                  "enum": ["Y", "N"],
-                  "examples": [
-                    "Y"
-                  ]
-                }
-              }
-            }
-          },
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/StatusOK"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
-    "/task.list": {
-      "post": {
-        "tags": [
-          "task"
-        ],
-        "summary": "Список задач",
-        "description": "",
-        "parameters": [{
-          "name": "auth",
-          "in": "query",
-          "description": "Токен авторизации",
-          "type": "string",
-          "required": true
-        }],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/TaskListResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
     "/document.sign": {
       "post": {
         "tags": [
@@ -1309,6 +939,42 @@
             "description": "Успешно",
             "schema": {
               "$ref": "#/definitions/StatusOK"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/task.list": {
+      "post": {
+        "tags": [
+          "task"
+        ],
+        "summary": "Список задач",
+        "description": "",
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/TaskListResponse"
             }
           },
           "400": {
@@ -2146,192 +1812,9 @@
         }
       }
     },
-    "StatusRoot": {
-      "type": "object",
-      "title": "Статус",
-      "additionalProperties": true,
-      "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Идентификатор статуса",
-          "examples": [
-            6051
-          ]
-        },
-        "ACTIVE": {
-          "$id": "#/properties/ACTIVE",
-          "type": "string",
-          "title": "Признак активности",
-          "enum": ["Y", "N"],
-          "examples": [
-            "Y"
-          ]
-        },
-        "SORT": {
-          "type": "integer",
-          "title": "Позиция при сортировке. чем значение меньше тем запись выше. Если значения равны у записей, сортируются по алфавиту NAME",
-          "examples": [
-            100
-          ]
-        },
-        "TIMESTAMP_X": {
-          "$id": "#/properties/TIMESTAMP_X",
-          "type": "integer",
-          "title": "Дата изменения элемента",
-          "examples": [
-            1525735820
-          ]
-        },
-        "TEMPLATE_ID": {
-          "$id": "#/properties/TEMPLATE_ID",
-          "type": "integer",
-          "title": "Шаблон заявки",
-          "examples": [
-            1
-          ]
-        },
-        "COMPLETED": {
-          "$id": "#/properties/COMPLETED",
-          "type": "string",
-          "title": "Завершена",
-          "enum": ["Y", "N"],
-          "examples": [
-            "Y"
-          ]
-        },
-        "NAME": {
-          "$id": "#/properties/NAME",
-          "type": "string",
-          "title": "Название",
-          "examples": [
-            "Заявка АХО №001"
-          ]
-        },
-        "PREVIEW_TEXT": {
-          "$id": "#/properties/PREVIEW_TEXT",
-          "type": "string",
-          "title": "Краткое описание",
-          "examples": [
-            "Ремонт офисного оборудования. Этаж 2 офис 207"
-          ]
-        },
-        "DETAIL_TEXT": {
-          "$id": "#/properties/DETAIL_TEXT",
-          "type": "string",
-          "title": "Полное описание",
-          "examples": [
-            "Добрый день! Сломался стул"
-          ]
-        }
-      }
-    },
-    "TemplateRoot": {
-      "type": "object",
-      "title": "Шаблон",
-      "additionalProperties": true,
-      "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Идентификатор шаблона",
-          "examples": [
-            6051
-          ]
-        },
-        "ACTIVE": {
-          "$id": "#/properties/ACTIVE",
-          "type": "string",
-          "title": "Признак активности",
-          "enum": ["Y", "N"],
-          "examples": [
-            "Y"
-          ]
-        },
-        "SORT": {
-          "type": "integer",
-          "title": "Позиция при сортировке. чем значение меньше тем запись выше. Если значения равны у записей, сортируются по алфавиту NAME",
-          "examples": [
-            100
-          ]
-        },
-        "NAME": {
-          "$id": "#/properties/NAME",
-          "type": "string",
-          "title": "Название",
-          "examples": [
-            "Заявка АХО"
-          ]
-        },
-        "PREVIEW_PICTURE": {
-          "$id": "#/properties/PREVIEW_PICTURE",
-          "type": "string",
-          "title": "Изображение",
-          "examples": [
-            "base64:sdf565c4vsd8f4"
-          ]
-        }
-      }
-    },
-    "ServiceTree": {
-      "type": "object",
-      "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Иерархия структуры услуг",
-          "examples": [
-            769
-          ]
-        },
-        "NAME": {
-          "type": "string",
-          "title": "Название услуги",
-          "examples": [
-            "Услуги"
-          ]
-        },
-        "TEMPLATE_ID": {
-          "type": "integer",
-          "title": "Идентификатор шаблона",
-          "examples": [
-            1
-          ]
-        },
-        "СHILDREN": {
-          "$id": "#/properties/CHILDREN",
-          "type": "array",
-          "title": "Список дочерних услуг. Неограниченный уровень вложенности услуг",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/ServiceInfo"
-          }
-        }
-      }
-    },
-    "ServiceInfo": {
-      "type": "object",
-      "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Иерархия структуры услуг",
-          "examples": [
-            769
-          ]
-        },
-        "NAME": {
-          "type": "string",
-          "title": "Название услуги",
-          "examples": [
-            "01. Общие"
-          ]
-        }
-      }
-    },
     "Document": {
       "type": "object",
-      "title": "Документы",
+      "title": "Документ Document",
       "additionalProperties": true,
       "properties": {
         "ID": {
@@ -2342,10 +1825,10 @@
         },
         "PATTERN": {
           "$id": "#/properties/PATTERN",
-          "type": "string",
-          "title": "Шаблон документа",
+          "type": "object",
+          "title": "Шаблон документа DocumentPattern",
           "additionalItems": true,
-          "items": {
+          "schema": {
             "$ref": "#/definitions/DocumentPattern"
           }
         },
@@ -2353,18 +1836,19 @@
           "$id": "#/properties/STATUS",
           "type": "string",
           "title": "Статус",
-          "default": "pending"
+          "description": "статус документа: pending - в ожидании, completed - исполненный",
+          "default": ""
         },
         "IDENTIFIER": {
           "$id": "#/properties/IDENTIFIER",
           "type": "string",
           "title": "Идентификатор документа в компании",
-          "default": "list"
+          "default": ""
         },
         "FIELDS": {
           "$id": "#/properties/FIELDS",
           "type": "array",
-          "title": "Поля документа",
+          "title": "Поля документа DocumentField",
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/DocumentField"
@@ -2372,6 +1856,7 @@
         },
         "CREATE_DATETIME": {
           "type": "integer",
+          "title": "Дата создания документа, unix-time",
           "default": 1525735820
         }
       }
@@ -2390,7 +1875,7 @@
         "PATTERN": {
           "$id": "#/properties/PATTERN",
           "type": "string",
-          "title": "Шаблон для поля",
+          "title": "Шаблон для поля DocumentPatternField",
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/DocumentPatternField"
@@ -2400,11 +1885,83 @@
           "$id": "#/properties/VALUE",
           "type": "string",
           "title": "Значение поля",
-          "default": ["первое значение", "второе значение"]
+          "description": "для type: number/dateTime - double, checkBox - boolean, list/flag - [string], period - [double], остальных - string",
+          "default": ""
         }
       }
     },
-    "DocumentCategories": {
+    "DocumentPattern": {
+      "type": "object",
+      "title": "Шаблон документа DocumentPattern",
+      "additionalProperties": true,
+      "properties": {
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Название",
+          "default": "",
+          "examples": [
+            "Название документа"
+          ]
+        },
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип документа",
+          "description": "request - заявка, certificate - справка, application - заявление",
+          "default": "",
+          "examples": [
+            "request", "certificate", "application"
+          ]
+        },
+        "FIELDS": {
+          "$id": "#/properties/FIELDS",
+          "type": "array",
+          "title": "Шаблонные поля документа DocumentPatternField",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentPatternField"
+          }
+        }
+      }
+    },
+    "DocumentPatternField": {
+      "type": "object",
+      "title": "Поле шаблона документа DocumentPatternField",
+      "additionalProperties": true,
+      "properties": {
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Название",
+          "default": "",
+          "examples": [
+            "Название поля"
+          ]
+        },
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип поля",
+          "default": "",
+          "description": "string, text number, flag (массив string, можно выбрать один элемент), checkBox (true/false), list (массив string, можно выбрать массив элементов), dateTime (Unix time), period (Unix time - Unix time), contact (Contact ID), image (URL), document (URL)",
+          "examples": [
+            "string", "text", "number", "flag",
+             "checkBox", "list", "dateTime",
+              "period", "contact",
+            "image ", "document"
+          ]
+        },
+        "AVAILABLE_VALUES": {
+          "$id": "#/properties/AVAILABLE_VALUES",
+          "type": "array",
+          "title": "Массив доступных значений поля, может быть пустым",
+          "additionalItems": true,
+          "default": []
+        }
+      }
+    },
+    "DocumentCategory": {
       "type": "object",
       "title": "Категория документов",
       "additionalProperties": true,
@@ -2419,76 +1976,21 @@
           "$id": "#/properties/TYPE",
           "type": "string",
           "title": "Тип категории",
-          "default": "list"
+          "description": "single - быстрая категория для одного документа, list - категория со списком документов, group - категория со сгруппированным списком документов",
+          "default": "list",
+          "examples": [
+            "single", "list", "group"
+          ]
         },
         "CONTENT": {
           "$id": "#/properties/CONTENT",
           "type": "array",
-          "title": "Содержание категории",
+          "title": "Содержание категории DocumentPattern",
+          "description": "для type: single - DocumentPattern, list - [DocumentPattern], group - [string : DocumentPattern]",
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/DocumentPattern"
           }
-        }
-      }
-    },
-    "DocumentPattern": {
-      "type": "object",
-      "title": "Шаблон документа",
-      "additionalProperties": true,
-      "properties": {
-        "TITLE": {
-          "$id": "#/properties/TITLE",
-          "type": "string",
-          "title": "Название",
-          "default": "Название документа"
-        },
-        "TYPE": {
-          "$id": "#/properties/TYPE",
-          "type": "string",
-          "title": "Тип документа",
-          "default": "request",
-          "examples": [
-            "request", "certificate", "application"
-          ]
-        },
-        "FIELDS": {
-          "$id": "#/properties/FIELDS",
-          "type": "array",
-          "title": "Шаблонные поля документа",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/DocumentPatternField"
-          }
-        }
-      }
-    },
-    "DocumentPatternField": {
-      "type": "object",
-      "title": "Поле шаблона документа",
-      "additionalProperties": true,
-      "properties": {
-        "TITLE": {
-          "$id": "#/properties/TITLE",
-          "type": "string",
-          "title": "Название",
-          "default": "Название поля"
-        },
-        "TYPE": {
-          "$id": "#/properties/TYPE",
-          "type": "string",
-          "title": "Тип поля",
-          "default": "text",
-          "examples": [
-            "string", "text", "number", "flag", "checkBox", "list", "dateTime", "period", "contact"
-          ]
-        },
-        "AVAILABLE_VALUES": {
-          "$id": "#/properties/AVAILABLE_VALUES",
-          "type": "array",
-          "title": "Массив доступных значений",
-          "additionalItems": true,
-          "default": ["example text value"]
         }
       }
     },
@@ -2690,86 +2192,6 @@
         }
       }
     },
-    "StatusListResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "title": "Список статусов",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/StatusRoot"
-          }
-        },
-        "status": {
-          "type": "string",
-          "default": "ok"
-        },
-        "timestamp": {
-          "type": "integer",
-          "default": 1525735820
-        }
-      }
-    },
-    "TemplateListResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "title": "Шаблоны документов",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/TemplateRoot"
-          }
-        },
-        "status": {
-          "type": "string",
-          "default": "ok"
-        },
-        "timestamp": {
-          "type": "integer",
-          "default": 1525735820
-        }
-      }
-    },
-    "ServiceTreeResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "title": "Список услуг",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/ServiceTree"
-          }
-        },
-        "status": {
-          "type": "string",
-          "default": "ok"
-        },
-        "timestamp": {
-          "type": "integer",
-          "default": 1525735820
-        }
-      }
-    },
-    "TaskListResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "title": "Список статусов",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/TaskRoot"
-          }
-        },
-        "status": {
-          "type": "string",
-          "default": "ok"
-        },
-        "timestamp": {
-          "type": "integer",
-          "default": 1525735820
-        }
-      }
-    },
     "DocumentListResponse": {
       "type": "object",
       "properties": {
@@ -2797,7 +2219,27 @@
           "title": "Список категорий документов",
           "additionalItems": true,
           "items": {
-            "$ref": "#/definitions/DocumentCategories"
+            "$ref": "#/definitions/DocumentCategory"
+          }
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "TaskListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "title": "Список статусов",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/TaskRoot"
           }
         },
         "status": {
