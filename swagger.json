@@ -1210,6 +1210,42 @@
         }
       }
     },
+    "/document.list": {
+      "post": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Список документов",
+        "description": "",
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/DocumentListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
     "/document.categories": {
       "post": {
         "tags": [
@@ -1229,6 +1265,50 @@
             "description": "Успешно",
             "schema": {
               "$ref": "#/definitions/DocumentCategoriesResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/document.add": {
+      "post": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Добавить документ",
+        "description": "",
+        "parameters": [{
+            "in": "body",
+            "name": "post",
+            "description": "json",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Document"
+            }
+          }, {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/StatusOK"
             }
           },
           "400": {
@@ -2249,6 +2329,81 @@
         }
       }
     },
+    "Document": {
+      "type": "object",
+      "title": "Документы",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "string",
+          "title": "UUID обьекта",
+          "default": 1
+        },
+        "PATTERN": {
+          "$id": "#/properties/PATTERN",
+          "type": "string",
+          "title": "Шаблон документа",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentPattern"
+          }
+        },
+        "STATUS": {
+          "$id": "#/properties/STATUS",
+          "type": "string",
+          "title": "Статус",
+          "default": "pending"
+        },
+        "IDENTIFIER": {
+          "$id": "#/properties/IDENTIFIER",
+          "type": "string",
+          "title": "Идентификатор документа в компании",
+          "default": "list"
+        },
+        "FIELDS": {
+          "$id": "#/properties/FIELDS",
+          "type": "array",
+          "title": "Поля документа",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentField"
+          }
+        },
+        "CREATE_DATETIME": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "DocumentField": {
+      "type": "object",
+      "title": "Поле документы",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "string",
+          "title": "UUID обьекта",
+          "default": 1
+        },
+        "PATTERN": {
+          "$id": "#/properties/PATTERN",
+          "type": "string",
+          "title": "Шаблон для поля",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentPatternField"
+          }
+        },
+        "VALUE": {
+          "$id": "#/properties/VALUE",
+          "type": "string",
+          "title": "Значение поля",
+          "default": ["первое значение", "второе значение"]
+        }
+      }
+    },
     "DocumentCategories": {
       "type": "object",
       "title": "Категория документов",
@@ -2264,13 +2419,14 @@
           "$id": "#/properties/TYPE",
           "type": "string",
           "title": "Тип категории",
-          "default": "single"
+          "default": "list"
         },
         "CONTENT": {
           "$id": "#/properties/CONTENT",
-          "type": "object",
+          "type": "array",
           "title": "Содержание категории",
-          "default": {
+          "additionalItems": true,
+          "items": {
             "$ref": "#/definitions/DocumentPattern"
           }
         }
@@ -2602,6 +2758,26 @@
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/TaskRoot"
+          }
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "DocumentListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "title": "Список документов",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/Document"
           }
         },
         "status": {
