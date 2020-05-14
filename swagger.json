@@ -16,26 +16,24 @@
   "basePath": "/api/v1",
   "host": "demo.com",
   "tags": [{
-      "name": "auth",
-      "description": "Авторизация"
-    },
-    {
-      "name": "departments",
-      "description": "Структура предприятия."
-    },
-    {
-      "name": "employee",
-      "description": "Сотрудники"
-    },
-    {
-      "name": "document",
-      "description": "Документы"
-    },
-    {
-      "name": "task",
-      "description": "Задачи"
-    }
-  ],
+    "name": "auth",
+    "description": "Авторизация"
+  }, {
+    "name": "departments",
+    "description": "Структура предприятия."
+  }, {
+    "name": "employee",
+    "description": "Сотрудники"
+  }, {
+    "name": "document",
+    "description": "Документы"
+  }, {
+    "name": "task",
+    "description": "Задачи"
+  }, {
+    "name": "calendar",
+    "description": "Календарь"
+  }],
   "x-tagGroups": [{
     "name": "Endpoints",
     "tags": [
@@ -43,7 +41,8 @@
       "departments",
       "employee",
       "document",
-      "task"
+      "task",
+      "calendar"
     ]
   }],
   "schemes": [
@@ -202,35 +201,33 @@
         "summary": null,
         "description": "Привязка токена устройства",
         "parameters": [{
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "required": [
-                "DEVICE_ID"
-              ],
-              "properties": {
-                "DEVICE_ID": {
-                  "type": "string",
-                  "title": "Токен устройства",
-                  "description": "Токен устройства для APN и FB",
-                  "examples": [
-                    "5499fdaadsd09ddks00s99f88dfer9e9nb0b00bbnb0n0h"
-                  ]
-                }
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "required": [
+              "DEVICE_ID"
+            ],
+            "properties": {
+              "DEVICE_ID": {
+                "type": "string",
+                "title": "Токен устройства",
+                "description": "Токен устройства для APN и FB",
+                "examples": [
+                  "5499fdaadsd09ddks00s99f88dfer9e9nb0b00bbnb0n0h"
+                ]
               }
             }
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -432,8 +429,7 @@
                 }
               }
             }
-          },
-          {
+          }, {
             "name": "auth",
             "in": "query",
             "description": "Токен авторизации",
@@ -471,48 +467,46 @@
         "summary": "Список филиалов",
         "description": "При заданном занчании параметра LAST_SYNC_DATE возвращаются элементы измненные после заданной даты. Параметры кроме auth являються не обязательными",
         "parameters": [{
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "LAST_SYNC_DATE": {
-                  "name": "LAST_SYNC_DATE",
-                  "in": "query",
-                  "description": "Дата (unix-время) последней успешной синхронизации",
-                  "type": "integer",
-                  "examples": [
-                    1525735820
-                  ]
-                },
-                "LIMIT": {
-                  "name": "PAGE",
-                  "description": "Кол-во элементов при постраничном просмотре (если не задан отдает все элементы)",
-                  "type": "integer",
-                  "default": 500,
-                  "required": false
-                },
-                "PAGE": {
-                  "name": "PAGE",
-                  "in": "query",
-                  "description": "Номер страницы (начинается с 0)",
-                  "type": "integer",
-                  "default": 0,
-                  "required": false
-                }
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "LAST_SYNC_DATE": {
+                "name": "LAST_SYNC_DATE",
+                "in": "query",
+                "description": "Дата (unix-время) последней успешной синхронизации",
+                "type": "integer",
+                "examples": [
+                  1525735820
+                ]
+              },
+              "LIMIT": {
+                "name": "PAGE",
+                "description": "Кол-во элементов при постраничном просмотре (если не задан отдает все элементы)",
+                "type": "integer",
+                "default": 500,
+                "required": false
+              },
+              "PAGE": {
+                "name": "PAGE",
+                "in": "query",
+                "description": "Номер страницы (начинается с 0)",
+                "type": "integer",
+                "default": 0,
+                "required": false
               }
             }
-          },
-          {
-            "name": "auth",
-            "in": "query",
-            "description": "Токен авторизации",
-            "type": "string",
-            "required": true
           }
-        ],
+        }, {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Успешно",
@@ -778,35 +772,34 @@
         "summary": "Подписать документ",
         "description": "Можно передать идентификатор документа или задачи",
         "parameters": [{
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "DOCUMENT_ID": {
-                  "name": "DOCUMENT_ID",
-                  "in": "query",
-                  "description": "идентификатор документа",
-                  "type": "integer",
-                  "examples": [
-                    2332
-                  ]
-                },
-                "TASK_ID": {
-                  "name": "TASK_ID",
-                  "in": "query",
-                  "description": "идентификатор задачи",
-                  "type": "integer",
-                  "examples": [
-                    2332
-                  ]
-                }
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "DOCUMENT_ID": {
+                "name": "DOCUMENT_ID",
+                "in": "query",
+                "description": "идентификатор документа",
+                "type": "integer",
+                "examples": [
+                  2332
+                ]
+              },
+              "TASK_ID": {
+                "name": "TASK_ID",
+                "in": "query",
+                "description": "идентификатор задачи",
+                "type": "integer",
+                "examples": [
+                  2332
+                ]
               }
             }
-          },
-          {
+          }
+        }, {
           "name": "auth",
           "in": "query",
           "description": "Токен авторизации",
@@ -915,14 +908,14 @@
         "summary": "Добавить документ",
         "description": "",
         "parameters": [{
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Document"
-            }
-          }, {
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Document"
+          }
+        }, {
           "name": "auth",
           "in": "query",
           "description": "Токен авторизации",
@@ -970,6 +963,116 @@
             "description": "Успешно",
             "schema": {
               "$ref": "#/definitions/TaskListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/calendar.meeting.list": {
+      "post": {
+        "tags": [
+          "calendar"
+        ],
+        "summary": "Список переговорных",
+        "description": "",
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/CalendarMeetingListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/calendar.meeting.room": {
+      "post": {
+        "tags": [
+          "calendar"
+        ],
+        "summary": "Переговорная с записями",
+        "description": "",
+        "parameters": [{
+            "in": "body",
+            "name": "post",
+            "description": "json",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "DATE_FROM": {
+                  "name": "DATE_FROM",
+                  "in": "query",
+                  "description": "Дата (unix-время) начала",
+                  "type": "integer",
+                  "examples": [
+                    1525735820
+                  ]
+                },
+                "DATE_TO": {
+                  "name": "DATE_TO",
+                  "in": "query",
+                  "description": "Дата (unix-время) завершения",
+                  "type": "integer",
+                  "examples": [
+                    1525735820
+                  ]
+                },
+                "ID": {
+                  "name": "ID",
+                  "in": "query",
+                  "description": "идентификатор переговорной",
+                  "type": "integer",
+                  "examples": [
+                    2332
+                  ]
+                }
+              }
+            }
+          },
+          {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/CalendarMeetingRoomResponse"
             }
           },
           "400": {
@@ -1930,8 +2033,8 @@
           "description": "string, text number, flag (массив string, можно выбрать один элемент), checkBox (true/false), list (массив string, можно выбрать массив элементов), dateTime (Unix time), period (Unix time - Unix time), contact (Contact ID), image (URL), document (URL)",
           "examples": [
             "string", "text", "number", "flag",
-             "checkBox", "list", "dateTime",
-              "period", "contact",
+            "checkBox", "list", "dateTime",
+            "period", "contact",
             "image ", "document"
           ]
         },
@@ -1939,8 +2042,9 @@
           "$id": "#/properties/AVAILABLE_VALUES",
           "type": "array",
           "title": "Массив доступных значений поля, может быть пустым",
-          "additionalItems": true,
-          "default": []
+          "examples": [
+            []
+          ]
         },
         "OPTION_VALUES": {
           "$id": "#/properties/OPTION_VALUES",
@@ -2087,6 +2191,526 @@
             "base64"
           ],
           "default": ["файл в base64"]
+        }
+      }
+    },
+    "CalendarMeeting": {
+      "type": "object",
+      "title": "Переговорная",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "integer",
+          "title": "Идентификатор переговорной",
+          "examples": [
+            6051
+          ]
+        },
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Название",
+          "examples": [
+            "Тестовая переговорная"
+          ]
+        },
+        "DESCRIPTION": {
+          "$id": "#/properties/DESCRIPTION",
+          "type": "string",
+          "title": "Описание",
+          "examples": [
+            "Тестовая переговорная"
+          ]
+        },
+        "UF_EMAIL": {
+          "$id": "#/properties/UF_EMAIL",
+          "type": "string",
+          "title": "Email",
+          "examples": [
+            "test@mail.ru"
+          ]
+        },
+        "UF_FLOOR": {
+          "$id": "#/properties/UF_FLOOR",
+          "type": "string",
+          "title": "Этаж",
+          "examples": [
+            "test@mail.ru"
+          ]
+        },
+        "UF_PHONE": {
+          "$id": "#/properties/UF_PHONE",
+          "type": "string",
+          "title": "Телефон",
+          "examples": [
+            "565656"
+          ]
+        },
+        "UF_PLACES": {
+          "$id": "#/properties/UF_PLACES",
+          "type": "string",
+          "title": "Мест",
+          "examples": [
+            "5"
+          ]
+        }
+      }
+    },
+    "CalendarMeetingRoom": {
+      "type": "object",
+      "title": "Список записей переговорной",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "integer",
+          "title": "Идентификатор переговорной",
+          "examples": [
+            6051
+          ]
+        },
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Название",
+          "examples": [
+            "Тестовая переговорная"
+          ]
+        },
+        "DESCRIPTION": {
+          "$id": "#/properties/DESCRIPTION",
+          "type": "string",
+          "title": "Описание",
+          "examples": [
+            "Тестовая переговорная"
+          ]
+        },
+        "UF_EMAIL": {
+          "$id": "#/properties/UF_EMAIL",
+          "type": "string",
+          "title": "Email",
+          "examples": [
+            "test@mail.ru"
+          ]
+        },
+        "UF_FLOOR": {
+          "$id": "#/properties/UF_FLOOR",
+          "type": "string",
+          "title": "Этаж",
+          "examples": [
+            "test@mail.ru"
+          ]
+        },
+        "UF_PHONE": {
+          "$id": "#/properties/UF_PHONE",
+          "type": "string",
+          "title": "Телефон",
+          "examples": [
+            "565656"
+          ]
+        },
+        "UF_PLACES": {
+          "$id": "#/properties/UF_PLACES",
+          "type": "string",
+          "title": "Мест",
+          "examples": [
+            "5"
+          ]
+        },
+        "ENTRIES": {
+          "$id": "#/properties/ENTRIES",
+          "type": "array",
+          "title": "Список записей переговорной",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/CalendarEntry"
+          }
+        }
+      }
+    },
+    "CalendarEntry": {
+      "type": "object",
+      "title": "Запись переговорной",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "string",
+          "title": "Идентификатор",
+          "default": "",
+          "examples": [
+            "49"
+          ]
+        },
+        "PARENT_ID": {
+          "$id": "#/properties/PARENT_ID",
+          "type": "string",
+          "title": "Идентификатор родителя",
+          "default": "",
+          "examples": [
+            "49"
+          ]
+        },
+        "ACTIVE": {
+          "$id": "#/properties/ACTIVE",
+          "type": "string",
+          "title": "Флаг активности",
+          "enum": ["Y", "N"],
+          "examples": [
+            "Y"
+          ]
+        },
+        "DELETED": {
+          "$id": "#/properties/DELETED",
+          "type": "string",
+          "title": "Флаг удаленности",
+          "enum": ["Y", "N"],
+          "examples": [
+            "N"
+          ]
+        },
+        "OWNER_ID": {
+          "$id": "#/properties/OWNER_ID",
+          "type": "string",
+          "title": "Владелец",
+          "default": "",
+          "examples": [
+            "1"
+          ]
+        },
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "The NAME schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "werwerwer"
+          ]
+        },
+        "DATE_FROM": {
+          "$id": "#/properties/DATE_FROM",
+          "type": "string",
+          "title": "Дата начала",
+          "default": "",
+          "examples": [
+            "14.05.2020 17:00:00"
+          ]
+        },
+        "DATE_TO": {
+          "$id": "#/properties/DATE_TO",
+          "type": "string",
+          "title": "Дата завершения",
+          "default": "",
+          "examples": [
+            "14.05.2020 18:00:00"
+          ]
+        },
+        "TZ_FROM": {
+          "$id": "#/properties/TZ_FROM",
+          "type": "string",
+          "title": "Временная зона начала",
+          "default": "",
+          "examples": [
+            "Europe/Moscow"
+          ]
+        },
+        "TZ_TO": {
+          "$id": "#/properties/TZ_TO",
+          "type": "string",
+          "title": "Временная зона завершения",
+          "default": "",
+          "examples": [
+            "Europe/Moscow"
+          ]
+        },
+        "TZ_OFFSET_FROM": {
+          "$id": "#/properties/TZ_OFFSET_FROM",
+          "type": "string",
+          "title": "Сдвиг временной начала",
+          "default": "",
+          "examples": [
+            "10800"
+          ]
+        },
+        "TZ_OFFSET_TO": {
+          "$id": "#/properties/TZ_OFFSET_TO",
+          "type": "string",
+          "title": "Сдвиг временной завершения",
+          "default": "",
+          "examples": [
+            "10800"
+          ]
+        },
+        "DATE_FROM_TS_UTC": {
+          "$id": "#/properties/DATE_FROM_TS_UTC",
+          "type": "string",
+          "title": "unix-time начала",
+          "default": "",
+          "examples": [
+            "1589450400"
+          ]
+        },
+        "DATE_TO_TS_UTC": {
+          "$id": "#/properties/DATE_TO_TS_UTC",
+          "type": "string",
+          "title": "unix-time завершения",
+          "default": "",
+          "examples": [
+            "1589454000"
+          ]
+        },
+        "TIMESTAMP_X": {
+          "$id": "#/properties/TIMESTAMP_X",
+          "type": "string",
+          "title": "Дата изменения",
+          "default": "",
+          "examples": [
+            "14.05.2020 13:00:15"
+          ]
+        },
+        "DATE_CREATE": {
+          "$id": "#/properties/DATE_CREATE",
+          "type": "string",
+          "title": "Дата создания",
+          "default": "",
+          "examples": [
+            "14.05.2020 13:00:15"
+          ]
+        },
+        "DESCRIPTION": {
+          "$id": "#/properties/DESCRIPTION",
+          "type": "string",
+          "title": "Описание",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "ACCESSIBILITY": {
+          "$id": "#/properties/ACCESSIBILITY",
+          "type": "string",
+          "title": "Доступность",
+          "description": "Пример - busy",
+          "default": "",
+          "examples": [
+            "busy"
+          ]
+        },
+        "IMPORTANCE": {
+          "$id": "#/properties/IMPORTANCE",
+          "type": "string",
+          "title": "Важность",
+          "description": "Пример - normal",
+          "default": "",
+          "examples": [
+            "normal"
+          ]
+        },
+        "IS_MEETING": {
+          "$id": "#/properties/IS_MEETING",
+          "type": "boolean",
+          "title": "Встреча",
+          "default": false,
+          "examples": [
+            false
+          ]
+        },
+        "MEETING_STATUS": {
+          "$id": "#/properties/MEETING_STATUS",
+          "type": "string",
+          "title": "Статус встречи",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "MEETING": {
+          "$id": "#/properties/MEETING",
+          "type": "object",
+          "title": "Информация о встрече",
+          "default": {},
+          "additionalProperties": true,
+          "properties": {
+            "HOST_NAME": {
+              "$id": "#/properties/MEETING/properties/HOST_NAME",
+              "type": "string",
+              "title": "The HOST_NAME schema",
+              "default": "",
+              "examples": [
+                "Корпоративный портал"
+              ]
+            },
+            "NOTIFY": {
+              "$id": "#/properties/MEETING/properties/NOTIFY",
+              "type": "boolean",
+              "title": "Уведомления",
+              "default": false,
+              "examples": [
+                true
+              ]
+            },
+            "ALLOW_INVITE": {
+              "$id": "#/properties/MEETING/properties/ALLOW_INVITE",
+              "type": "boolean",
+              "title": "Разрешить приглашения",
+              "default": false,
+              "examples": [
+                true
+              ]
+            },
+            "MEETING_CREATOR": {
+              "$id": "#/properties/MEETING/properties/MEETING_CREATOR",
+              "type": "string",
+              "title": "Создатель встречи",
+              "default": "",
+              "examples": [
+                "1"
+              ]
+            },
+            "REINVITE": {
+              "$id": "#/properties/MEETING/properties/REINVITE",
+              "type": "boolean",
+              "title": "The REINVITE schema",
+              "default": false,
+              "examples": [
+                false
+              ]
+            }
+          }
+        },
+        "LOCATION": {
+          "$id": "#/properties/LOCATION",
+          "type": "string",
+          "title": "Место",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "REMIND": {
+          "$id": "#/properties/REMIND",
+          "type": "array",
+          "title": "Напомнить",
+          "default": [],
+          "examples": [
+            [{
+              "type": "min",
+              "count": "15"
+            }]
+          ],
+          "additionalItems": true,
+          "items": {
+            "anyOf": [{
+              "$id": "#/properties/REMIND/items/anyOf/0",
+              "type": "object",
+              "title": "The first anyOf schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [{
+                "type": "min",
+                "count": "15"
+              }],
+              "additionalProperties": true,
+              "properties": {
+                "type": {
+                  "$id": "#/properties/REMIND/items/anyOf/0/properties/type",
+                  "type": "string",
+                  "title": "The type schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "min"
+                  ]
+                },
+                "count": {
+                  "$id": "#/properties/REMIND/items/anyOf/0/properties/count",
+                  "type": "string",
+                  "title": "The count schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "15"
+                  ]
+                }
+              }
+            }],
+            "$id": "#/properties/REMIND/items"
+          }
+        },
+        "COLOR": {
+          "$id": "#/properties/COLOR",
+          "type": "string",
+          "title": "Цвет",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "TEXT_COLOR": {
+          "$id": "#/properties/TEXT_COLOR",
+          "type": "string",
+          "title": "Цвет",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "RRULE": {
+          "$id": "#/properties/RRULE",
+          "type": "string",
+          "title": "The RRULE schema",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "EXDATE": {
+          "$id": "#/properties/EXDATE",
+          "type": "string",
+          "title": "The EXDATE schema",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "ATTENDEES_CODES": {
+          "$id": "#/properties/ATTENDEES_CODES",
+          "type": "string",
+          "title": "The ATTENDEES_CODES schema",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "RELATIONS": {
+          "$id": "#/properties/RELATIONS",
+          "type": "string",
+          "title": "Связи",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "SECT_ID": {
+          "$id": "#/properties/SECT_ID",
+          "type": "string",
+          "title": "Идентификатор секции",
+          "default": "",
+          "examples": [
+            "1094"
+          ]
+        },
+        "UF_PARENT_EVENT": {
+          "$id": "#/properties/UF_PARENT_EVENT",
+          "type": "string",
+          "title": "The UF_PARENT_EVENT schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            ""
+          ]
         }
       }
     },
@@ -2256,6 +2880,42 @@
           "items": {
             "$ref": "#/definitions/TaskRoot"
           }
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "CalendarMeetingListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "title": "Список переговорных",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/CalendarMeeting"
+          }
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "CalendarMeetingRoomResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CalendarMeetingRoom"
         },
         "status": {
           "type": "string",
