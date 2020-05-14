@@ -1024,44 +1024,43 @@
         "summary": "Переговорная с записями",
         "description": "",
         "parameters": [{
-            "in": "body",
-            "name": "post",
-            "description": "json",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "DATE_FROM": {
-                  "name": "DATE_FROM",
-                  "in": "query",
-                  "description": "Дата (unix-время) начала",
-                  "type": "integer",
-                  "examples": [
-                    1525735820
-                  ]
-                },
-                "DATE_TO": {
-                  "name": "DATE_TO",
-                  "in": "query",
-                  "description": "Дата (unix-время) завершения",
-                  "type": "integer",
-                  "examples": [
-                    1525735820
-                  ]
-                },
-                "ID": {
-                  "name": "ID",
-                  "in": "query",
-                  "description": "идентификатор переговорной",
-                  "type": "integer",
-                  "examples": [
-                    2332
-                  ]
-                }
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "DATE_FROM": {
+                "name": "DATE_FROM",
+                "in": "query",
+                "description": "Дата (unix-время) начала",
+                "type": "integer",
+                "examples": [
+                  1525735820
+                ]
+              },
+              "DATE_TO": {
+                "name": "DATE_TO",
+                "in": "query",
+                "description": "Дата (unix-время) завершения",
+                "type": "integer",
+                "examples": [
+                  1525735820
+                ]
+              },
+              "ID": {
+                "name": "ID",
+                "in": "query",
+                "description": "идентификатор переговорной",
+                "type": "integer",
+                "examples": [
+                  2332
+                ]
               }
             }
-          },
-          {
+          }
+        }, {
           "name": "auth",
           "in": "query",
           "description": "Токен авторизации",
@@ -1073,6 +1072,544 @@
             "description": "Успешно",
             "schema": {
               "$ref": "#/definitions/CalendarMeetingRoomResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/calendar.entry.add": {
+      "post": {
+        "tags": [
+          "calendar"
+        ],
+        "summary": "Создание события",
+        "description": "",
+        "parameters": [{
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "NAME": {
+                "name": "NAME",
+                "in": "query",
+                "description": "Название события",
+                "type": "string",
+                "examples": [
+                  "тестовое событие"
+                ]
+              },
+              "DATE_FROM": {
+                "name": "DATE_FROM",
+                "in": "query",
+                "description": "Дата (14.05.2020 15:30:00) начала",
+                "type": "string",
+                "examples": [
+                  "14.05.2020 15:30:00"
+                ]
+              },
+              "DATE_TO": {
+                "name": "DATE_TO",
+                "in": "query",
+                "description": "Дата (14.05.2020 15:30:00) завершения",
+                "type": "string",
+                "examples": [
+                  "14.05.2020 15:30:00"
+                ]
+              },
+              "DEFAULT_TZ": {
+                "name": "DEFAULT_TZ",
+                "in": "query",
+                "description": "Временная зона (Europe/Moscow)",
+                "type": "string",
+                "examples": [
+                  ""
+                ]
+              },
+              "SECTION": {
+                "name": "SECTION",
+                "in": "query",
+                "description": "идентификатор секции",
+                "type": "integer",
+                "examples": [
+                  2332
+                ]
+              },
+              "LOCATION": {
+                "name": "LOCATION",
+                "in": "query",
+                "description": "Место",
+                "type": "string",
+                "examples": [
+                  "место"
+                ]
+              },
+              "SKIP_TIME": {
+                "name": "SKIP_TIME",
+                "in": "query",
+                "description": "Пропустить",
+                "type": "string",
+                "enum": [
+                  "Y", "N"
+                ],
+                "examples": [
+                  "N"
+                ]
+              },
+              "REMIND": {
+                "name": "REMIND",
+                "in": "query",
+                "description": "Напомнить массив минут",
+                "type": "array",
+                "examples": [
+                  2332
+                ]
+              },
+              "ATTENDEES": {
+                "name": "ATTENDEES",
+                "in": "query",
+                "description": "Массив участников",
+                "type": "array",
+                "examples": [
+                  [1]
+                ]
+              },
+              "ACCESS_CODES": {
+                "name": "access_codes",
+                "in": "query",
+                "description": "Коды доступа массив значений",
+                "type": "array",
+                "examples": [
+                  "U1"
+                ]
+              },
+              "MEETING_NOTIFY": {
+                "name": "MEETING_NOTIFY",
+                "in": "query",
+                "description": "Включить уведомления",
+                "type": "string",
+                "enum": [
+                  "Y", "N"
+                ],
+                "examples": [
+                  "N"
+                ]
+              },
+              "MEETING_ALLOW_INVITE": {
+                "name": "MEETING_ALLOW_INVITE",
+                "in": "query",
+                "description": "идентификатор переговорной",
+                "type": "string",
+                "enum": [
+                  "Y", "N"
+                ],
+                "examples": [
+                  "N"
+                ]
+              },
+              "EXCLUDE_USERS": {
+                "name": "EXCLUDE_USERS",
+                "in": "query",
+                "description": "Массив исключенных пользователей",
+                "type": "array",
+                "examples": [
+                  [2332]
+                ]
+              },
+              "COLOR": {
+                "name": "COLOR",
+                "in": "query",
+                "description": "Цвет (#2FC6F6)",
+                "type": "string",
+                "examples": [
+                  "#2FC6F6"
+                ]
+              }
+            }
+          }
+        }, {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/StatusOK"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/calendar.entry.edit": {
+      "post": {
+        "tags": [
+          "calendar"
+        ],
+        "summary": "Редактировать событие",
+        "description": "",
+        "parameters": [{
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "NAME": {
+                "name": "NAME",
+                "in": "query",
+                "description": "Название события",
+                "type": "string",
+                "examples": [
+                  "тестовое событие"
+                ]
+              },
+              "DATE_FROM": {
+                "name": "DATE_FROM",
+                "in": "query",
+                "description": "Дата (14.05.2020) начала",
+                "type": "string",
+                "examples": [
+                  "14.05.2020"
+                ]
+              },
+              "DATE_TO": {
+                "name": "DATE_TO",
+                "in": "query",
+                "description": "Дата (14.05.2020) завершения",
+                "type": "string",
+                "examples": [
+                  "14.05.2020"
+                ]
+              },
+              "TIME_FROM": {
+                "name": "TIME_FROM",
+                "in": "query",
+                "description": "Время (15:00) начала",
+                "type": "string",
+                "examples": [
+                  "15:00"
+                ]
+              },
+              "TIME_TO": {
+                "name": "TIME_TO",
+                "in": "query",
+                "description": "Время (16:00) завершения",
+                "type": "string",
+                "examples": [
+                  "16:00"
+                ]
+              },
+              "TIME_FROM_REAL": {
+                "name": "TIME_FROM_REAL",
+                "in": "query",
+                "description": "Время (15:00:00) начала",
+                "type": "string",
+                "examples": [
+                  "15:00"
+                ]
+              },
+              "TIME_TO_REAL": {
+                "name": "TIME_TO_REAL",
+                "in": "query",
+                "description": "Время (16:00:00) завершения",
+                "type": "string",
+                "examples": [
+                  "16:00"
+                ]
+              },
+              "TZ_FROM": {
+                "name": "TZ_FROM",
+                "in": "query",
+                "description": "Временная зона (Europe/Moscow)",
+                "type": "string",
+                "examples": [
+                  ""
+                ]
+              },
+              "TZ_TO": {
+                "name": "TZ_TO",
+                "in": "query",
+                "description": "Временная зона (Europe/Moscow)",
+                "type": "string",
+                "examples": [
+                  ""
+                ]
+              },
+              "TZ_DEFAULT": {
+                "name": "TZ_DEFAULT",
+                "in": "query",
+                "description": "Временная зона (Europe/Moscow)",
+                "type": "string",
+                "examples": [
+                  ""
+                ]
+              },
+              "SECTION": {
+                "name": "SECTION",
+                "in": "query",
+                "description": "идентификатор секции",
+                "type": "integer",
+                "examples": [
+                  2332
+                ]
+              },
+              "LOCATION": {
+                "name": "LOCATION",
+                "in": "query",
+                "description": "Место",
+                "type": "string",
+                "examples": [
+                  "место"
+                ]
+              },
+              "SKIP_TIME": {
+                "name": "SKIP_TIME",
+                "in": "query",
+                "description": "Пропустить",
+                "type": "string",
+                "enum": [
+                  "Y", "N"
+                ],
+                "examples": [
+                  "N"
+                ]
+              },
+              "REMIND": {
+                "name": "REMIND",
+                "in": "query",
+                "description": "Напомнить массив минут",
+                "type": "array",
+                "examples": [
+                  2332
+                ]
+              },
+              "ATTENDEES": {
+                "name": "ATTENDEES",
+                "in": "query",
+                "description": "Массив участников",
+                "type": "array",
+                "examples": [
+                  [1]
+                ]
+              },
+              "ACCESS_CODES": {
+                "name": "access_codes",
+                "in": "query",
+                "description": "Коды доступа массив значений",
+                "type": "array",
+                "examples": [
+                  "U1"
+                ]
+              },
+              "MEETING_NOTIFY": {
+                "name": "MEETING_NOTIFY",
+                "in": "query",
+                "description": "Включить уведомления",
+                "type": "string",
+                "enum": [
+                  "Y", "N"
+                ],
+                "examples": [
+                  "N"
+                ]
+              },
+              "MEETING_ALLOW_INVITE": {
+                "name": "MEETING_ALLOW_INVITE",
+                "in": "query",
+                "description": "идентификатор переговорной",
+                "type": "string",
+                "enum": [
+                  "Y", "N"
+                ],
+                "examples": [
+                  "N"
+                ]
+              },
+              "EXCLUDE_USERS": {
+                "name": "EXCLUDE_USERS",
+                "in": "query",
+                "description": "Массив исключенных пользователей",
+                "type": "array",
+                "examples": [
+                  [2332]
+                ]
+              },
+              "COLOR": {
+                "name": "COLOR",
+                "in": "query",
+                "description": "Цвет (#2FC6F6)",
+                "type": "string",
+                "examples": [
+                  "#2FC6F6"
+                ]
+              },
+              "EVENT_RRULE": {
+                "name": "EVENT_RRULE",
+                "in": "query",
+                "description": "идентификатор переговорной",
+                "type": "object",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "FREQ": {
+                      "name": "FREQ",
+                      "in": "query",
+                      "description": "Частота",
+                      "type": "string",
+                      "default": "NONE"
+                    },
+                    "INTERVAL": {
+                      "name": "INTERVAL",
+                      "in": "query",
+                      "description": "Интервал",
+                      "type": "string",
+                      "default": "1"
+                    },
+                    "COUNT": {
+                      "name": "COUNT",
+                      "in": "query",
+                      "description": "COUNT",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "UNTIL": {
+                      "name": "UNTIL",
+                      "in": "query",
+                      "description": "UNTIL",
+                      "type": "string",
+                      "default": ""
+                    }
+                  }
+                }
+              },
+              "RRULE_ENDSON": {
+                "name": "RRULE_ENDSON",
+                "in": "query",
+                "description": "Тип (never)",
+                "type": "string",
+                "examples": [
+                  "never"
+                ]
+              },
+              "ACCESSIBILITY": {
+                "name": "ACCESSIBILITY",
+                "in": "query",
+                "description": "Доступ",
+                "type": "string",
+                "default": "quest",
+                "examples": [
+                  "quest"
+                ]
+              }
+            }
+          }
+        }, {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/StatusOK"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/calendar.entry.delete": {
+      "post": {
+        "tags": [
+          "calendar"
+        ],
+        "summary": "Удалить событие",
+        "description": "",
+        "parameters": [{
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "ENTRY_ID": {
+                "name": "ENTRY_ID",
+                "in": "query",
+                "description": "Идентификатор записи",
+                "type": "integer",
+                "examples": [
+                  "тестовое событие"
+                ]
+              },
+              "REQ_ID": {
+                "name": "REQ_ID",
+                "in": "query",
+                "description": "Идентификатор",
+                "type": "integer",
+                "examples": [
+                  "тестовое событие"
+                ]
+              }
+            }
+          }
+        }, {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/StatusOK"
             }
           },
           "400": {
