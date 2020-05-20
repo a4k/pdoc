@@ -159,7 +159,7 @@
       }
     },
     "/user.logout": {
-      "post": {
+      "get": {
         "tags": [
           "auth"
         ],
@@ -194,7 +194,7 @@
       }
     },
     "/user.attach": {
-      "post": {
+      "get": {
         "tags": [
           "auth"
         ],
@@ -287,7 +287,7 @@
       }
     },
     "/employee.get": {
-      "post": {
+      "get": {
         "tags": [
           "employee"
         ],
@@ -460,7 +460,7 @@
       }
     },
     "/departments.root": {
-      "post": {
+      "get": {
         "tags": [
           "departments"
         ],
@@ -530,7 +530,7 @@
       }
     },
     "/departments.admin.tree": {
-      "post": {
+      "get": {
         "tags": [
           "departments"
         ],
@@ -565,7 +565,7 @@
       }
     },
     "/departments.admin.get": {
-      "post": {
+      "get": {
         "tags": [
           "departments"
         ],
@@ -648,7 +648,7 @@
       }
     },
     "/departments.internal.tree": {
-      "post": {
+      "get": {
         "tags": [
           "departments"
         ],
@@ -683,7 +683,7 @@
       }
     },
     "/departments.internal.get": {
-      "post": {
+      "get": {
         "tags": [
           "departments"
         ],
@@ -829,7 +829,7 @@
       }
     },
     "/document.list": {
-      "post": {
+      "get": {
         "tags": [
           "document"
         ],
@@ -865,7 +865,7 @@
       }
     },
     "/document.categories": {
-      "post": {
+      "get": {
         "tags": [
           "document"
         ],
@@ -945,7 +945,7 @@
       }
     },
     "/task.list": {
-      "post": {
+      "get": {
         "tags": [
           "task"
         ],
@@ -981,7 +981,7 @@
       }
     },
     "/calendar.meeting.list": {
-      "post": {
+      "get": {
         "tags": [
           "calendar"
         ],
@@ -1017,7 +1017,7 @@
       }
     },
     "/calendar.meeting.room": {
-      "post": {
+      "get": {
         "tags": [
           "calendar"
         ],
