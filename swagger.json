@@ -42,7 +42,8 @@
       "employee",
       "document",
       "task",
-      "calendar"
+      "calendar",
+      "notification"
     ]
   }],
   "schemes": [
@@ -194,7 +195,7 @@
       }
     },
     "/user.attach": {
-      "get": {
+      "post": {
         "tags": [
           "auth"
         ],
@@ -288,7 +289,7 @@
     },
     "/employee.get": {
       "get": {
-        "tags": [
+        "post": [
           "employee"
         ],
         "summary": "Информация о сотрудниках",
@@ -394,7 +395,6 @@
         ],
         "summary": "Информация о типах отсутсвия",
         "parameters": [
-
           {
             "in": "body",
             "name": "post",
@@ -1626,6 +1626,107 @@
           }
         }
       }
+    },
+    "/notification.categories": {
+      "get": {
+        "tags": [
+          "notification"
+        ],
+        "summary": "Список категорий уведомлений",
+        "description": "",
+        "parameters": [{
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/NotificationCategoriesResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/notification.list": {
+      "post": {
+        "tags": [
+          "notification"
+        ],
+        "summary": "Список уведомлений",
+        "description": "Передается список категорий уведомлений и дата создания по которым выгрузить уведомления",
+        "parameters": [{
+            "in": "body",
+            "name": "post",
+            "description": "json",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "START_DATE": {
+                  "name": "START_DATE",
+                  "in": "query",
+                  "description": "Дата (unix-время) начала создания уведомления",
+                  "type": "integer",
+                  "examples": [
+                    1525735820
+                  ]
+                },
+                "CATEGORY_CODE": {
+                  "name": "CATEGORY_CODE",
+                  "in": "query",
+                  "description": "код категории (можно передавать массивом)",
+                  "type": "string",
+                  "examples": [
+                    "TASKS"
+                  ]
+                }
+              }
+            }
+          },
+          {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/NotificationListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2650,6 +2751,59 @@
         }
       }
     },
+    "NotificationCategory": {
+      "type": "object",
+      "title": "Уведомления - Категория",
+      "additionalProperties": true,
+      "properties": {
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Название",
+          "default": "Название категории"
+        },
+        "CODE": {
+          "$id": "#/properties/CODE",
+          "type": "string",
+          "title": "Код",
+          "default": "Код категории"
+        }
+      }
+    },
+    "Notification": {
+      "type": "object",
+      "title": "Уведомление - элемент",
+      "additionalProperties": true,
+      "properties": {
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Тема",
+          "default": "",
+          "examples": [
+            "Тема уведомления"
+          ]
+        },
+        "DESCRIPTION": {
+          "$id": "#/properties/DESCRIPTION",
+          "type": "string",
+          "title": "Описание",
+          "description": "Описание"
+        },
+        "CATEGORY_CODE": {
+          "$id": "#/properties/CATEGORY_CODE",
+          "type": "string",
+          "title": "Категория уведомления",
+          "description": "Категория уведомления"
+        },
+        "TIMESTAMP": {
+          "type": "integer",
+          "title": "Дата создания",
+          "description": "Дата создания уведомления, unix-time",
+          "default": 1525735820
+        }
+      }
+    },
     "TaskRoot": {
       "type": "object",
       "title": "Задача",
@@ -3453,6 +3607,46 @@
       "properties": {
         "result": {
           "$ref": "#/definitions/CalendarMeetingRoom"
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "NotificationCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "title": "Список категорий уведомлений",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/NotificationCategory"
+          }
+        },
+        "status": {
+          "type": "string",
+          "default": "ok"
+        },
+        "timestamp": {
+          "type": "integer",
+          "default": 1525735820
+        }
+      }
+    },
+    "NotificationListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "title": "Список уведомлений",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/Notification"
+          }
         },
         "status": {
           "type": "string",
