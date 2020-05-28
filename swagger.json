@@ -1830,17 +1830,17 @@
         "LAST_NAME": {
 
           "type": "string",
-          "title": "Отчетсво",
+          "title": "Фамилия",
           "examples": [
-            "Глебова"
+            "Ивановна"
           ]
         },
         "SECOND_NAME": {
 
           "type": "string",
-          "title": "Фамилия",
+          "title": "Отчество",
           "examples": [
-            "Ивановна"
+            "Глебова"
           ]
         },
 
@@ -1972,17 +1972,17 @@
         "LAST_NAME": {
 
           "type": "string",
-          "title": "Отчетсво",
+          "title": "Фамилия",
           "examples": [
-            "Глебова"
+            "Ивановна"
           ]
         },
         "SECOND_NAME": {
 
           "type": "string",
-          "title": "Фамилия",
+          "title": "Отчество",
           "examples": [
-            "Ивановна"
+            "Глебова"
           ]
         },
         "PERSONAL_PHOTO": {
@@ -2094,6 +2094,14 @@
           "title": "Идентификатор типа отсутствия",
           "examples": [
             3
+          ]
+        },
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Тип отсутствия",
+          "examples": [
+            "Отпуск"
           ]
         },
         "DESCRIPTION": {
