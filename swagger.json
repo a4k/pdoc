@@ -980,6 +980,72 @@
         }
       }
     },
+    "/task.sign": {
+      "post": {
+        "tags": [
+          "task"
+        ],
+        "summary": "Подписать задачу",
+        "parameters": [{
+          "in": "body",
+          "name": "post",
+          "description": "json",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "TASK_ID": {
+                "name": "TASK_ID",
+                "in": "query",
+                "description": "идентификатор задачи",
+                "type": "integer",
+                "examples": [
+                  2332
+                ]
+              },
+              "TASK_COMMENT": {
+                "name": "TASK_COMMENT",
+                "in": "query",
+                "description": "комментарий",
+                "type": "string",
+                "examples": [
+                  "test comment"
+                ]
+              },
+              "BUTTON": {
+                "$ref": "#/definitions/TaskButton"
+              }
+            }
+          }
+        }, {
+          "name": "auth",
+          "in": "query",
+          "description": "Токен авторизации",
+          "type": "string",
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "schema": {
+              "$ref": "#/definitions/StatusOK"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          }
+        }
+      }
+    },
     "/calendar.meeting.list": {
       "get": {
         "tags": [
@@ -2825,24 +2891,24 @@
             6051
           ]
         },
-        "ACTIVE": {
-          "$id": "#/properties/ACTIVE",
+        "NAME": {
+          "$id": "#/properties/NAME",
           "type": "string",
-          "title": "Признак активности",
-          "enum": ["Y", "N"],
+          "title": "Название",
           "examples": [
-            "Y"
+            "Необходимо согласовать заказ визиток"
           ]
         },
-        "SORT": {
-          "type": "integer",
-          "title": "Позиция при сортировке. чем значение меньше тем запись выше. Если значения равны у записей, сортируются по алфавиту NAME",
+        "DESCRIPTION": {
+          "$id": "#/properties/DESCRIPTION",
+          "type": "string",
+          "title": "Краткое описание",
           "examples": [
-            100
+            "Исполнитель 50 шт"
           ]
         },
-        "TIMESTAMP_X": {
-          "$id": "#/properties/TIMESTAMP_X",
+        "MODIFIED": {
+          "$id": "#/properties/MODIFIED",
           "type": "integer",
           "title": "Дата изменения элемента",
           "examples": [
@@ -2858,38 +2924,87 @@
             "Y"
           ]
         },
+        "STATUS": {
+          "type": "integer",
+          "title": "Статус задачи.",
+          "description": "0 - Running;1 - CompleteYes;2 - CompleteNo;3 - CompleteOk;4 - Timeout;5 - CompleteCancel;",
+          "examples": [
+            1
+          ]
+        },
+        "USER_STATUS": {
+          "type": "integer",
+          "title": "Статус задачи пользователя.",
+          "description": "0 - Waiting;1 - Yes;2 - No;3 - Ok;4 - Cancel;",
+          "examples": [
+            1
+          ]
+        },
+        "WORKFLOW_ID": {
+          "$id": "#/properties/WORKFLOW_ID",
+          "type": "string",
+          "title": "Идентификатор рабочей области",
+          "examples": [
+            "78sdf8734ji2"
+          ]
+        },
+        "DOCUMENT_URL": {
+          "$id": "#/properties/DOCUMENT_URL",
+          "type": "array",
+          "title": "ссылка на документ (pdf)"
+        },
+        "BUTTONS": {
+          "$id": "#/properties/BUTTONS",
+          "type": "array",
+          "title": "Кнопки задачи",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/TaskButton"
+          }
+        }
+      }
+    },
+    "TaskButton": {
+      "type": "object",
+      "title": "Кнопка задачи TaskButton",
+      "additionalProperties": true,
+      "properties": {
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип кнопки",
+          "description": "типы: submit",
+          "default": "",
+          "examples": [
+            "submit"
+          ]
+        },
         "NAME": {
           "$id": "#/properties/NAME",
           "type": "string",
-          "title": "Название",
-          "examples": [
-            "Необходимо согласовать заказ визиток"
-          ]
+          "title": "Название, внутренний идентификатор кнопки",
+          "default": ""
         },
-        "PREVIEW_TEXT": {
-          "$id": "#/properties/PREVIEW_TEXT",
+        "TARGET_USER_STATUS": {
+          "$id": "#/properties/TARGET_USER_STATUS",
+          "type": "integer",
+          "title": "Новый статус задачи",
+          "default": 1
+        },
+        "VALUE": {
+          "$id": "#/properties/VALUE",
           "type": "string",
-          "title": "Краткое описание",
+          "title": "Значение кнопки",
+          "enum": ["Y", "N"],
           "examples": [
-            "Исполнитель 50 шт"
+            "Y"
           ]
         },
-        "DETAIL_TEXT": {
-          "$id": "#/properties/DETAIL_TEXT",
+        "TEXT": {
+          "$id": "#/properties/TEXT",
           "type": "string",
-          "title": "Полное описание",
-          "examples": [
-            "Ноутбук леново"
-          ]
-        },
-        "FILES": {
-          "$id": "#/properties/FILES",
-          "type": "array",
-          "title": "Файлы в base64",
-          "examples": [
-            "base64"
-          ],
-          "default": ["файл в base64"]
+          "title": "Выводимое название кнопки",
+          "default": ""
         }
       }
     },
@@ -3574,7 +3689,7 @@
       "type": "object",
       "properties": {
         "result": {
-          "title": "Список статусов",
+          "title": "Список задач",
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/TaskRoot"
