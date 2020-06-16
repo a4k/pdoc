@@ -764,70 +764,6 @@
         }
       }
     },
-    "/document.sign": {
-      "post": {
-        "tags": [
-          "document"
-        ],
-        "summary": "Подписать документ",
-        "description": "Можно передать идентификатор документа или задачи",
-        "parameters": [{
-          "in": "body",
-          "name": "post",
-          "description": "json",
-          "required": true,
-          "schema": {
-            "type": "object",
-            "properties": {
-              "DOCUMENT_ID": {
-                "name": "DOCUMENT_ID",
-                "in": "query",
-                "description": "идентификатор документа",
-                "type": "integer",
-                "examples": [
-                  2332
-                ]
-              },
-              "TASK_ID": {
-                "name": "TASK_ID",
-                "in": "query",
-                "description": "идентификатор задачи",
-                "type": "integer",
-                "examples": [
-                  2332
-                ]
-              }
-            }
-          }
-        }, {
-          "name": "auth",
-          "in": "query",
-          "description": "Токен авторизации",
-          "type": "string",
-          "required": true
-        }],
-        "responses": {
-          "200": {
-            "description": "Успешно",
-            "schema": {
-              "$ref": "#/definitions/StatusOK"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
     "/document.list": {
       "get": {
         "tags": [
@@ -913,7 +849,7 @@
           "description": "json",
           "required": true,
           "schema": {
-            "$ref": "#/definitions/Document"
+            "$ref": "#/definitions/DocumentPattern"
           }
         }, {
           "name": "auth",
@@ -2633,9 +2569,6 @@
           "title": "UUID обьекта",
           "default": 1
         },
-        "PATTERN": {
-          "$ref": "#/definitions/DocumentPattern"
-        },
         "STATUS": {
           "$id": "#/properties/STATUS",
           "type": "string",
@@ -2643,8 +2576,8 @@
           "description": "статус документа: pending - в ожидании, completed - исполненный",
           "default": ""
         },
-        "IDENTIFIER": {
-          "$id": "#/properties/IDENTIFIER",
+        "XML_ID": {
+          "$id": "#/properties/XML_ID",
           "type": "string",
           "title": "Идентификатор документа в компании",
           "default": ""
@@ -2658,7 +2591,7 @@
             "$ref": "#/definitions/DocumentField"
           }
         },
-        "CREATE_DATETIME": {
+        "UPDATE_TIME": {
           "type": "integer",
           "title": "Дата создания документа, unix-time",
           "default": 1525735820
@@ -2693,6 +2626,11 @@
       "title": "Шаблон документа DocumentPattern",
       "additionalProperties": true,
       "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "number",
+          "title": "Идентификатор шаблона",
+        },
         "TITLE": {
           "$id": "#/properties/TITLE",
           "type": "string",
@@ -2728,6 +2666,15 @@
       "title": "Поле шаблона документа DocumentPatternField",
       "additionalProperties": true,
       "properties": {
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Идентификатор",
+          "default": "",
+          "examples": [
+            "Идентификатор поля"
+          ]
+        },
         "TITLE": {
           "$id": "#/properties/TITLE",
           "type": "string",
@@ -2754,28 +2701,29 @@
           "$id": "#/properties/AVAILABLE_VALUES",
           "type": "array",
           "title": "Массив доступных значений поля, может быть пустым",
-          "examples": [
-            []
-          ]
-        },
-        "OPTION_VALUES": {
-          "$id": "#/properties/OPTION_VALUES",
-          "type": "array",
-          "title": "Массив опций для поля",
           "additionalItems": true,
           "items": {
-            "$ref": "#/definitions/DocumentOptionField"
+            "$ref": "#/definitions/DocumentFieldData"
+          }
+        },
+        "DATA": {
+          "$id": "#/properties/DATA",
+          "type": "array",
+          "title": "Описание поля",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentFieldData"
           }
         }
       }
     },
-    "DocumentOptionField": {
+    "DocumentFieldData": {
       "type": "object",
-      "title": "Поле опций поля документа DocumentOptionField",
+      "title": "Поле дополнительного поля документа DocumentFieldData",
       "additionalProperties": true,
       "properties": {
-        "TYPE": {
-          "$id": "#/properties/TYPE",
+        "NAME": {
+          "$id": "#/properties/NAME",
           "type": "string",
           "title": "Тип опции поля",
           "default": "",
