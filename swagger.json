@@ -1397,10 +1397,13 @@
                 "name": "id",
                 "in": "query",
                 "description": "Идентификатор события",
-                "type": "integer",
-                "examples": [
-                  "тестовое событие"
-                ]
+                "type": "string"
+              },
+              "ownerId": {
+                "name": "ownerId",
+                "in": "query",
+                "description": "Идентификатор владельца календаря",
+                "type": "string"
               }
             }
           }
