@@ -841,7 +841,7 @@
         "tags": [
           "document"
         ],
-        "summary": "Добавить документ",
+        "summary": "Добавление документа",
         "description": "",
         "parameters": [{
           "in": "body",
@@ -921,7 +921,7 @@
         "tags": [
           "task"
         ],
-        "summary": "Подписать задачу",
+        "summary": "Подписание задачи",
         "parameters": [{
           "in": "body",
           "name": "post",
@@ -982,12 +982,12 @@
         }
       }
     },
-    "/calendar.meeting.list": {
+    "/calendar.section.get": {
       "get": {
         "tags": [
           "calendar"
         ],
-        "summary": "Список переговорных",
+        "summary": "Список календарей",
         "description": "",
         "parameters": [{
           "name": "auth",
@@ -1000,7 +1000,7 @@
           "200": {
             "description": "Успешно",
             "schema": {
-              "$ref": "#/definitions/CalendarMeetingListResponse"
+              "$ref": "#/definitions/CalendarSectionGetResponse"
             }
           },
           "400": {
@@ -1018,12 +1018,12 @@
         }
       }
     },
-    "/calendar.meeting.room": {
+    "/calendar.event.get": {
       "get": {
         "tags": [
           "calendar"
         ],
-        "summary": "Переговорная с записями",
+        "summary": "Список событий календаря",
         "description": "",
         "parameters": [{
           "in": "body",
@@ -1033,8 +1033,8 @@
           "schema": {
             "type": "object",
             "properties": {
-              "DATE_FROM": {
-                "name": "DATE_FROM",
+              "from": {
+                "name": "from",
                 "in": "query",
                 "description": "Дата (unix-время) начала",
                 "type": "integer",
@@ -1042,8 +1042,8 @@
                   1525735820
                 ]
               },
-              "DATE_TO": {
-                "name": "DATE_TO",
+              "to": {
+                "name": "to",
                 "in": "query",
                 "description": "Дата (unix-время) завершения",
                 "type": "integer",
@@ -1051,10 +1051,10 @@
                   1525735820
                 ]
               },
-              "ID": {
-                "name": "ID",
+              "ownerId": {
+                "name": "ownerId",
                 "in": "query",
-                "description": "идентификатор переговорной",
+                "description": "идентификатор владельца календаря",
                 "type": "integer",
                 "examples": [
                   2332
@@ -1073,7 +1073,7 @@
           "200": {
             "description": "Успешно",
             "schema": {
-              "$ref": "#/definitions/CalendarMeetingRoomResponse"
+              "$ref": "#/definitions/CalendarEventGetResponse"
             }
           },
           "400": {
@@ -1091,7 +1091,7 @@
         }
       }
     },
-    "/calendar.entry.add": {
+    "/calendar.event.add": {
       "post": {
         "tags": [
           "calendar"
@@ -1106,140 +1106,100 @@
           "schema": {
             "type": "object",
             "properties": {
-              "NAME": {
-                "name": "NAME",
-                "in": "query",
-                "description": "Название события",
+              "ownerId": {
+                "name": "ownerId",
                 "type": "string",
-                "examples": [
-                  "тестовое событие"
-                ]
+                "in": "query"
               },
-              "DATE_FROM": {
-                "name": "DATE_FROM",
-                "in": "query",
-                "description": "Дата (14.05.2020 15:30:00) начала",
+              "from": {
+                "name": "from",
                 "type": "string",
-                "examples": [
-                  "14.05.2020 15:30:00"
-                ]
+                "in": "query"
               },
-              "DATE_TO": {
-                "name": "DATE_TO",
-                "in": "query",
-                "description": "Дата (14.05.2020 15:30:00) завершения",
+              "to": {
+                "name": "to",
                 "type": "string",
-                "examples": [
-                  "14.05.2020 15:30:00"
-                ]
+                "in": "query"
               },
-              "DEFAULT_TZ": {
-                "name": "DEFAULT_TZ",
-                "in": "query",
-                "description": "Временная зона (Europe/Moscow)",
+              "section": {
+                "name": "section",
                 "type": "string",
-                "examples": [
-                  ""
-                ]
+                "in": "query"
               },
-              "SECTION": {
-                "name": "SECTION",
-                "in": "query",
-                "description": "идентификатор секции",
-                "type": "integer",
-                "examples": [
-                  2332
-                ]
-              },
-              "LOCATION": {
-                "name": "LOCATION",
-                "in": "query",
-                "description": "Место",
+              "name": {
+                "name": "name",
                 "type": "string",
-                "examples": [
-                  "место"
-                ]
+                "in": "query"
               },
-              "SKIP_TIME": {
-                "name": "SKIP_TIME",
-                "in": "query",
-                "description": "Пропустить",
+              "skip_time": {
+                "name": "skip_time",
                 "type": "string",
-                "enum": [
-                  "Y", "N"
-                ],
-                "examples": [
-                  "N"
-                ]
+                "in": "query"
               },
-              "REMIND": {
-                "name": "REMIND",
-                "in": "query",
-                "description": "Напомнить массив минут",
-                "type": "array",
-                "examples": [
-                  2332
-                ]
-              },
-              "ATTENDEES": {
-                "name": "ATTENDEES",
-                "in": "query",
-                "description": "Массив участников",
-                "type": "array",
-                "examples": [
-                  [1]
-                ]
-              },
-              "ACCESS_CODES": {
-                "name": "access_codes",
-                "in": "query",
-                "description": "Коды доступа массив значений",
-                "type": "array",
-                "examples": [
-                  "U1"
-                ]
-              },
-              "MEETING_NOTIFY": {
-                "name": "MEETING_NOTIFY",
-                "in": "query",
-                "description": "Включить уведомления",
+              "description": {
+                "name": "description",
                 "type": "string",
-                "enum": [
-                  "Y", "N"
-                ],
-                "examples": [
-                  "N"
-                ]
+                "in": "query"
               },
-              "MEETING_ALLOW_INVITE": {
-                "name": "MEETING_ALLOW_INVITE",
-                "in": "query",
-                "description": "идентификатор переговорной",
+              "color": {
+                "name": "color",
                 "type": "string",
-                "enum": [
-                  "Y", "N"
-                ],
-                "examples": [
-                  "N"
-                ]
+                "in": "query"
               },
-              "EXCLUDE_USERS": {
-                "name": "EXCLUDE_USERS",
-                "in": "query",
-                "description": "Массив исключенных пользователей",
-                "type": "array",
-                "examples": [
-                  [2332]
-                ]
-              },
-              "COLOR": {
-                "name": "COLOR",
-                "in": "query",
-                "description": "Цвет (#2FC6F6)",
+              "text_color": {
+                "name": "text_color",
                 "type": "string",
-                "examples": [
-                  "#2FC6F6"
-                ]
+                "in": "query"
+              },
+              "accessibility": {
+                "name": "accessibility",
+                "type": "string",
+                "in": "query"
+              },
+              "importance": {
+                "name": "importance",
+                "type": "string",
+                "in": "query"
+              },
+              "private_event": {
+                "name": "private_event",
+                "type": "string",
+                "in": "query"
+              },
+              "rrule": {
+                "name": "rrule",
+                "type": "string",
+                "in": "query"
+              },
+              "is_meeting": {
+                "name": "is_meeting",
+                "type": "string",
+                "in": "query"
+              },
+              "location": {
+                "name": "location",
+                "type": "string",
+                "in": "query"
+              },
+              "remind": {
+                "name": "remind",
+                "type": "string",
+                "in": "query"
+              },
+              "attendees": {
+                "name": "attendees",
+                "type": "string",
+                "in": "query"
+              },
+              "host": {
+                "name": "host",
+                "type": "string",
+                "in": "query"
+              },
+              "meeting": {
+                "name": "meeting",
+                "type": "string",
+                "in": "query"
               }
             }
           }
@@ -1272,12 +1232,12 @@
         }
       }
     },
-    "/calendar.entry.edit": {
+    "/calendar.event.update": {
       "post": {
         "tags": [
           "calendar"
         ],
-        "summary": "Редактировать событие",
+        "summary": "Обновление события",
         "description": "",
         "parameters": [{
           "in": "body",
@@ -1287,252 +1247,105 @@
           "schema": {
             "type": "object",
             "properties": {
-              "NAME": {
-                "name": "NAME",
-                "in": "query",
-                "description": "Название события",
+              "id": {
+                "name": "id",
                 "type": "string",
-                "examples": [
-                  "тестовое событие"
-                ]
+                "in": "query"
               },
-              "DATE_FROM": {
-                "name": "DATE_FROM",
-                "in": "query",
-                "description": "Дата (14.05.2020) начала",
+              "ownerId": {
+                "name": "ownerId",
                 "type": "string",
-                "examples": [
-                  "14.05.2020"
-                ]
+                "in": "query"
               },
-              "DATE_TO": {
-                "name": "DATE_TO",
-                "in": "query",
-                "description": "Дата (14.05.2020) завершения",
+              "from": {
+                "name": "from",
                 "type": "string",
-                "examples": [
-                  "14.05.2020"
-                ]
+                "in": "query"
               },
-              "TIME_FROM": {
-                "name": "TIME_FROM",
-                "in": "query",
-                "description": "Время (15:00) начала",
+              "to": {
+                "name": "to",
                 "type": "string",
-                "examples": [
-                  "15:00"
-                ]
+                "in": "query"
               },
-              "TIME_TO": {
-                "name": "TIME_TO",
-                "in": "query",
-                "description": "Время (16:00) завершения",
+              "section": {
+                "name": "section",
                 "type": "string",
-                "examples": [
-                  "16:00"
-                ]
+                "in": "query"
               },
-              "TIME_FROM_REAL": {
-                "name": "TIME_FROM_REAL",
-                "in": "query",
-                "description": "Время (15:00:00) начала",
+              "name": {
+                "name": "name",
                 "type": "string",
-                "examples": [
-                  "15:00"
-                ]
+                "in": "query"
               },
-              "TIME_TO_REAL": {
-                "name": "TIME_TO_REAL",
-                "in": "query",
-                "description": "Время (16:00:00) завершения",
+              "skip_time": {
+                "name": "skip_time",
                 "type": "string",
-                "examples": [
-                  "16:00"
-                ]
+                "in": "query"
               },
-              "TZ_FROM": {
-                "name": "TZ_FROM",
-                "in": "query",
-                "description": "Временная зона (Europe/Moscow)",
+              "description": {
+                "name": "description",
                 "type": "string",
-                "examples": [
-                  ""
-                ]
+                "in": "query"
               },
-              "TZ_TO": {
-                "name": "TZ_TO",
-                "in": "query",
-                "description": "Временная зона (Europe/Moscow)",
+              "color": {
+                "name": "color",
                 "type": "string",
-                "examples": [
-                  ""
-                ]
+                "in": "query"
               },
-              "TZ_DEFAULT": {
-                "name": "TZ_DEFAULT",
-                "in": "query",
-                "description": "Временная зона (Europe/Moscow)",
+              "text_color": {
+                "name": "text_color",
                 "type": "string",
-                "examples": [
-                  ""
-                ]
+                "in": "query"
               },
-              "SECTION": {
-                "name": "SECTION",
-                "in": "query",
-                "description": "идентификатор секции",
-                "type": "integer",
-                "examples": [
-                  2332
-                ]
-              },
-              "LOCATION": {
-                "name": "LOCATION",
-                "in": "query",
-                "description": "Место",
+              "accessibility": {
+                "name": "accessibility",
                 "type": "string",
-                "examples": [
-                  "место"
-                ]
+                "in": "query"
               },
-              "SKIP_TIME": {
-                "name": "SKIP_TIME",
-                "in": "query",
-                "description": "Пропустить",
+              "importance": {
+                "name": "importance",
                 "type": "string",
-                "enum": [
-                  "Y", "N"
-                ],
-                "examples": [
-                  "N"
-                ]
+                "in": "query"
               },
-              "REMIND": {
-                "name": "REMIND",
-                "in": "query",
-                "description": "Напомнить массив минут",
-                "type": "array",
-                "examples": [
-                  2332
-                ]
-              },
-              "ATTENDEES": {
-                "name": "ATTENDEES",
-                "in": "query",
-                "description": "Массив участников",
-                "type": "array",
-                "examples": [
-                  [1]
-                ]
-              },
-              "ACCESS_CODES": {
-                "name": "access_codes",
-                "in": "query",
-                "description": "Коды доступа массив значений",
-                "type": "array",
-                "examples": [
-                  "U1"
-                ]
-              },
-              "MEETING_NOTIFY": {
-                "name": "MEETING_NOTIFY",
-                "in": "query",
-                "description": "Включить уведомления",
+              "private_event": {
+                "name": "private_event",
                 "type": "string",
-                "enum": [
-                  "Y", "N"
-                ],
-                "examples": [
-                  "N"
-                ]
+                "in": "query"
               },
-              "MEETING_ALLOW_INVITE": {
-                "name": "MEETING_ALLOW_INVITE",
-                "in": "query",
-                "description": "идентификатор переговорной",
+              "rrule": {
+                "name": "rrule",
                 "type": "string",
-                "enum": [
-                  "Y", "N"
-                ],
-                "examples": [
-                  "N"
-                ]
+                "in": "query"
               },
-              "EXCLUDE_USERS": {
-                "name": "EXCLUDE_USERS",
-                "in": "query",
-                "description": "Массив исключенных пользователей",
-                "type": "array",
-                "examples": [
-                  [2332]
-                ]
-              },
-              "COLOR": {
-                "name": "COLOR",
-                "in": "query",
-                "description": "Цвет (#2FC6F6)",
+              "is_meeting": {
+                "name": "is_meeting",
                 "type": "string",
-                "examples": [
-                  "#2FC6F6"
-                ]
+                "in": "query"
               },
-              "EVENT_RRULE": {
-                "name": "EVENT_RRULE",
-                "in": "query",
-                "description": "идентификатор переговорной",
-                "type": "object",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "FREQ": {
-                      "name": "FREQ",
-                      "in": "query",
-                      "description": "Частота",
-                      "type": "string",
-                      "default": "NONE"
-                    },
-                    "INTERVAL": {
-                      "name": "INTERVAL",
-                      "in": "query",
-                      "description": "Интервал",
-                      "type": "string",
-                      "default": "1"
-                    },
-                    "COUNT": {
-                      "name": "COUNT",
-                      "in": "query",
-                      "description": "COUNT",
-                      "type": "string",
-                      "default": ""
-                    },
-                    "UNTIL": {
-                      "name": "UNTIL",
-                      "in": "query",
-                      "description": "UNTIL",
-                      "type": "string",
-                      "default": ""
-                    }
-                  }
-                }
-              },
-              "RRULE_ENDSON": {
-                "name": "RRULE_ENDSON",
-                "in": "query",
-                "description": "Тип (never)",
+              "location": {
+                "name": "location",
                 "type": "string",
-                "examples": [
-                  "never"
-                ]
+                "in": "query"
               },
-              "ACCESSIBILITY": {
-                "name": "ACCESSIBILITY",
-                "in": "query",
-                "description": "Доступ",
+              "remind": {
+                "name": "remind",
                 "type": "string",
-                "default": "quest",
-                "examples": [
-                  "quest"
-                ]
+                "in": "query"
+              },
+              "attendees": {
+                "name": "attendees",
+                "type": "string",
+                "in": "query"
+              },
+              "host": {
+                "name": "host",
+                "type": "string",
+                "in": "query"
+              },
+              "meeting": {
+                "name": "meeting",
+                "type": "string",
+                "in": "query"
               }
             }
           }
@@ -1570,7 +1383,7 @@
         "tags": [
           "calendar"
         ],
-        "summary": "Удалить событие",
+        "summary": "Удаление события",
         "description": "",
         "parameters": [{
           "in": "body",
@@ -1580,19 +1393,10 @@
           "schema": {
             "type": "object",
             "properties": {
-              "ENTRY_ID": {
-                "name": "ENTRY_ID",
+              "id": {
+                "name": "id",
                 "in": "query",
-                "description": "Идентификатор записи",
-                "type": "integer",
-                "examples": [
-                  "тестовое событие"
-                ]
-              },
-              "REQ_ID": {
-                "name": "REQ_ID",
-                "in": "query",
-                "description": "Идентификатор",
+                "description": "Идентификатор события",
                 "type": "integer",
                 "examples": [
                   "тестовое событие"
@@ -2629,7 +2433,7 @@
         "ID": {
           "$id": "#/properties/ID",
           "type": "number",
-          "title": "Идентификатор шаблона",
+          "title": "Идентификатор шаблона"
         },
         "TITLE": {
           "$id": "#/properties/TITLE",
@@ -2917,36 +2721,11 @@
       "title": "Кнопка задачи TaskButton",
       "additionalProperties": true,
       "properties": {
-        "TYPE": {
-          "$id": "#/properties/TYPE",
-          "type": "string",
-          "title": "Тип кнопки",
-          "description": "типы: submit",
-          "default": "",
-          "examples": [
-            "submit"
-          ]
-        },
         "NAME": {
           "$id": "#/properties/NAME",
           "type": "string",
           "title": "Название, внутренний идентификатор кнопки",
           "default": ""
-        },
-        "TARGET_USER_STATUS": {
-          "$id": "#/properties/TARGET_USER_STATUS",
-          "type": "integer",
-          "title": "Новый статус задачи",
-          "default": 1
-        },
-        "VALUE": {
-          "$id": "#/properties/VALUE",
-          "type": "string",
-          "title": "Значение кнопки",
-          "enum": ["Y", "N"],
-          "examples": [
-            "Y"
-          ]
         },
         "TEXT": {
           "$id": "#/properties/TEXT",
@@ -2956,523 +2735,143 @@
         }
       }
     },
-    "CalendarMeeting": {
+    "CalendarSection": {
       "type": "object",
-      "title": "Переговорная",
+      "title": "Календарь",
       "additionalProperties": true,
       "properties": {
         "ID": {
           "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Идентификатор переговорной",
-          "examples": [
-            6051
-          ]
+          "title": "ID",
+          "type": "string"
         },
         "NAME": {
           "$id": "#/properties/NAME",
-          "type": "string",
-          "title": "Название",
-          "examples": [
-            "Тестовая переговорная"
-          ]
+          "title": "NAME",
+          "type": "string"
         },
         "DESCRIPTION": {
           "$id": "#/properties/DESCRIPTION",
-          "type": "string",
-          "title": "Описание",
-          "examples": [
-            "Тестовая переговорная"
-          ]
+          "title": "DESCRIPTION",
+          "type": "string"
         },
-        "UF_EMAIL": {
-          "$id": "#/properties/UF_EMAIL",
-          "type": "string",
-          "title": "Email",
-          "examples": [
-            "test@mail.ru"
-          ]
+        "COLOR": {
+          "$id": "#/properties/COLOR",
+          "title": "COLOR",
+          "type": "string"
         },
-        "UF_FLOOR": {
-          "$id": "#/properties/UF_FLOOR",
-          "type": "string",
-          "title": "Этаж",
-          "examples": [
-            "test@mail.ru"
-          ]
+        "TEXT_COLOR": {
+          "$id": "#/properties/TEXT_COLOR",
+          "title": "TEXT_COLOR",
+          "type": "string"
         },
-        "UF_PHONE": {
-          "$id": "#/properties/UF_PHONE",
-          "type": "string",
-          "title": "Телефон",
-          "examples": [
-            "565656"
-          ]
-        },
-        "UF_PLACES": {
-          "$id": "#/properties/UF_PLACES",
-          "type": "string",
-          "title": "Мест",
-          "examples": [
-            "5"
-          ]
+        "OWNER_ID": {
+          "$id": "#/properties/OWNER_ID",
+          "title": "OWNER_ID",
+          "type": "string"
         }
       }
     },
-    "CalendarMeetingRoom": {
+    "CalendarEvent": {
       "type": "object",
-      "title": "Список записей переговорной",
+      "title": "Список событий календаря",
       "additionalProperties": true,
       "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
-          "type": "integer",
-          "title": "Идентификатор переговорной",
-          "examples": [
-            6051
-          ]
-        },
-        "NAME": {
-          "$id": "#/properties/NAME",
-          "type": "string",
-          "title": "Название",
-          "examples": [
-            "Тестовая переговорная"
-          ]
-        },
-        "DESCRIPTION": {
-          "$id": "#/properties/DESCRIPTION",
-          "type": "string",
-          "title": "Описание",
-          "examples": [
-            "Тестовая переговорная"
-          ]
-        },
-        "UF_EMAIL": {
-          "$id": "#/properties/UF_EMAIL",
-          "type": "string",
-          "title": "Email",
-          "examples": [
-            "test@mail.ru"
-          ]
-        },
-        "UF_FLOOR": {
-          "$id": "#/properties/UF_FLOOR",
-          "type": "string",
-          "title": "Этаж",
-          "examples": [
-            "test@mail.ru"
-          ]
-        },
-        "UF_PHONE": {
-          "$id": "#/properties/UF_PHONE",
-          "type": "string",
-          "title": "Телефон",
-          "examples": [
-            "565656"
-          ]
-        },
-        "UF_PLACES": {
-          "$id": "#/properties/UF_PLACES",
-          "type": "string",
-          "title": "Мест",
-          "examples": [
-            "5"
-          ]
-        },
-        "ENTRIES": {
-          "$id": "#/properties/ENTRIES",
-          "type": "array",
-          "title": "Список записей переговорной",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/CalendarEntry"
-          }
-        }
-      }
-    },
-    "CalendarEntry": {
-      "type": "object",
-      "title": "Запись переговорной",
-      "additionalProperties": true,
-      "properties": {
+        
         "ID": {
           "$id": "#/properties/ID",
           "type": "string",
-          "title": "Идентификатор",
-          "default": "",
-          "examples": [
-            "49"
-          ]
-        },
-        "PARENT_ID": {
-          "$id": "#/properties/PARENT_ID",
-          "type": "string",
-          "title": "Идентификатор родителя",
-          "default": "",
-          "examples": [
-            "49"
-          ]
-        },
-        "ACTIVE": {
-          "$id": "#/properties/ACTIVE",
-          "type": "string",
-          "title": "Флаг активности",
-          "enum": ["Y", "N"],
-          "examples": [
-            "Y"
-          ]
-        },
-        "DELETED": {
-          "$id": "#/properties/DELETED",
-          "type": "string",
-          "title": "Флаг удаленности",
-          "enum": ["Y", "N"],
-          "examples": [
-            "N"
-          ]
+          "title": "ID"
         },
         "OWNER_ID": {
           "$id": "#/properties/OWNER_ID",
           "type": "string",
-          "title": "Владелец",
-          "default": "",
-          "examples": [
-            "1"
-          ]
-        },
-        "NAME": {
-          "$id": "#/properties/NAME",
-          "type": "string",
-          "title": "The NAME schema",
-          "description": "An explanation about the purpose of this instance.",
-          "default": "",
-          "examples": [
-            "werwerwer"
-          ]
-        },
-        "DATE_FROM": {
-          "$id": "#/properties/DATE_FROM",
-          "type": "string",
-          "title": "Дата начала",
-          "default": "",
-          "examples": [
-            "14.05.2020 17:00:00"
-          ]
-        },
-        "DATE_TO": {
-          "$id": "#/properties/DATE_TO",
-          "type": "string",
-          "title": "Дата завершения",
-          "default": "",
-          "examples": [
-            "14.05.2020 18:00:00"
-          ]
-        },
-        "TZ_FROM": {
-          "$id": "#/properties/TZ_FROM",
-          "type": "string",
-          "title": "Временная зона начала",
-          "default": "",
-          "examples": [
-            "Europe/Moscow"
-          ]
-        },
-        "TZ_TO": {
-          "$id": "#/properties/TZ_TO",
-          "type": "string",
-          "title": "Временная зона завершения",
-          "default": "",
-          "examples": [
-            "Europe/Moscow"
-          ]
-        },
-        "TZ_OFFSET_FROM": {
-          "$id": "#/properties/TZ_OFFSET_FROM",
-          "type": "string",
-          "title": "Сдвиг временной начала",
-          "default": "",
-          "examples": [
-            "10800"
-          ]
-        },
-        "TZ_OFFSET_TO": {
-          "$id": "#/properties/TZ_OFFSET_TO",
-          "type": "string",
-          "title": "Сдвиг временной завершения",
-          "default": "",
-          "examples": [
-            "10800"
-          ]
+          "title": "OWNER_ID"
         },
         "DATE_FROM_TS_UTC": {
           "$id": "#/properties/DATE_FROM_TS_UTC",
           "type": "string",
-          "title": "unix-time начала",
-          "default": "",
-          "examples": [
-            "1589450400"
-          ]
+          "title": "DATE_FROM_TS_UTC"
         },
         "DATE_TO_TS_UTC": {
           "$id": "#/properties/DATE_TO_TS_UTC",
           "type": "string",
-          "title": "unix-time завершения",
-          "default": "",
-          "examples": [
-            "1589454000"
-          ]
-        },
-        "TIMESTAMP_X": {
-          "$id": "#/properties/TIMESTAMP_X",
-          "type": "string",
-          "title": "Дата изменения",
-          "default": "",
-          "examples": [
-            "14.05.2020 13:00:15"
-          ]
-        },
-        "DATE_CREATE": {
-          "$id": "#/properties/DATE_CREATE",
-          "type": "string",
-          "title": "Дата создания",
-          "default": "",
-          "examples": [
-            "14.05.2020 13:00:15"
-          ]
-        },
-        "DESCRIPTION": {
-          "$id": "#/properties/DESCRIPTION",
-          "type": "string",
-          "title": "Описание",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "ACCESSIBILITY": {
-          "$id": "#/properties/ACCESSIBILITY",
-          "type": "string",
-          "title": "Доступность",
-          "description": "Пример - busy",
-          "default": "",
-          "examples": [
-            "busy"
-          ]
-        },
-        "IMPORTANCE": {
-          "$id": "#/properties/IMPORTANCE",
-          "type": "string",
-          "title": "Важность",
-          "description": "Пример - normal",
-          "default": "",
-          "examples": [
-            "normal"
-          ]
-        },
-        "IS_MEETING": {
-          "$id": "#/properties/IS_MEETING",
-          "type": "boolean",
-          "title": "Встреча",
-          "default": false,
-          "examples": [
-            false
-          ]
-        },
-        "MEETING_STATUS": {
-          "$id": "#/properties/MEETING_STATUS",
-          "type": "string",
-          "title": "Статус встречи",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "MEETING": {
-          "$id": "#/properties/MEETING",
-          "type": "object",
-          "title": "Информация о встрече",
-          "default": {},
-          "additionalProperties": true,
-          "properties": {
-            "HOST_NAME": {
-              "$id": "#/properties/MEETING/properties/HOST_NAME",
-              "type": "string",
-              "title": "The HOST_NAME schema",
-              "default": "",
-              "examples": [
-                "Корпоративный портал"
-              ]
-            },
-            "NOTIFY": {
-              "$id": "#/properties/MEETING/properties/NOTIFY",
-              "type": "boolean",
-              "title": "Уведомления",
-              "default": false,
-              "examples": [
-                true
-              ]
-            },
-            "ALLOW_INVITE": {
-              "$id": "#/properties/MEETING/properties/ALLOW_INVITE",
-              "type": "boolean",
-              "title": "Разрешить приглашения",
-              "default": false,
-              "examples": [
-                true
-              ]
-            },
-            "MEETING_CREATOR": {
-              "$id": "#/properties/MEETING/properties/MEETING_CREATOR",
-              "type": "string",
-              "title": "Создатель встречи",
-              "default": "",
-              "examples": [
-                "1"
-              ]
-            },
-            "REINVITE": {
-              "$id": "#/properties/MEETING/properties/REINVITE",
-              "type": "boolean",
-              "title": "The REINVITE schema",
-              "default": false,
-              "examples": [
-                false
-              ]
-            }
-          }
-        },
-        "LOCATION": {
-          "$id": "#/properties/LOCATION",
-          "type": "string",
-          "title": "Место",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "REMIND": {
-          "$id": "#/properties/REMIND",
-          "type": "array",
-          "title": "Напомнить",
-          "default": [],
-          "examples": [
-            [{
-              "type": "min",
-              "count": "15"
-            }]
-          ],
-          "additionalItems": true,
-          "items": {
-            "anyOf": [{
-              "$id": "#/properties/REMIND/items/anyOf/0",
-              "type": "object",
-              "title": "The first anyOf schema",
-              "description": "An explanation about the purpose of this instance.",
-              "default": {},
-              "examples": [{
-                "type": "min",
-                "count": "15"
-              }],
-              "additionalProperties": true,
-              "properties": {
-                "type": {
-                  "$id": "#/properties/REMIND/items/anyOf/0/properties/type",
-                  "type": "string",
-                  "title": "The type schema",
-                  "description": "An explanation about the purpose of this instance.",
-                  "default": "",
-                  "examples": [
-                    "min"
-                  ]
-                },
-                "count": {
-                  "$id": "#/properties/REMIND/items/anyOf/0/properties/count",
-                  "type": "string",
-                  "title": "The count schema",
-                  "description": "An explanation about the purpose of this instance.",
-                  "default": "",
-                  "examples": [
-                    "15"
-                  ]
-                }
-              }
-            }],
-            "$id": "#/properties/REMIND/items"
-          }
-        },
-        "COLOR": {
-          "$id": "#/properties/COLOR",
-          "type": "string",
-          "title": "Цвет",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "TEXT_COLOR": {
-          "$id": "#/properties/TEXT_COLOR",
-          "type": "string",
-          "title": "Цвет",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "RRULE": {
-          "$id": "#/properties/RRULE",
-          "type": "string",
-          "title": "The RRULE schema",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "EXDATE": {
-          "$id": "#/properties/EXDATE",
-          "type": "string",
-          "title": "The EXDATE schema",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "ATTENDEES_CODES": {
-          "$id": "#/properties/ATTENDEES_CODES",
-          "type": "string",
-          "title": "The ATTENDEES_CODES schema",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "RELATIONS": {
-          "$id": "#/properties/RELATIONS",
-          "type": "string",
-          "title": "Связи",
-          "default": "",
-          "examples": [
-            ""
-          ]
+          "title": "DATE_TO_TS_UTC"
         },
         "SECT_ID": {
           "$id": "#/properties/SECT_ID",
           "type": "string",
-          "title": "Идентификатор секции",
-          "default": "",
-          "examples": [
-            "1094"
-          ]
+          "title": "SECT_ID"
         },
-        "UF_PARENT_EVENT": {
-          "$id": "#/properties/UF_PARENT_EVENT",
+        "NAME": {
+          "$id": "#/properties/NAME",
           "type": "string",
-          "title": "The UF_PARENT_EVENT schema",
-          "description": "An explanation about the purpose of this instance.",
-          "default": "",
-          "examples": [
-            ""
-          ]
+          "title": "NAME"
+        },
+        "DT_SKIP_TIME": {
+          "$id": "#/properties/DT_SKIP_TIME",
+          "type": "string",
+          "title": "DT_SKIP_TIME"
+        },
+        "COLOR": {
+          "$id": "#/properties/COLOR",
+          "type": "string",
+          "title": "COLOR"
+        },
+        "TEXT_COLOR": {
+          "$id": "#/properties/TEXT_COLOR",
+          "type": "string",
+          "title": "TEXT_COLOR"
+        },
+        "ACCESSIBILITY": {
+          "$id": "#/properties/ACCESSIBILITY",
+          "type": "string",
+          "title": "ACCESSIBILITY"
+        },
+        "IMPORTANCE": {
+          "$id": "#/properties/IMPORTANCE",
+          "type": "string",
+          "title": "IMPORTANCE"
+        },
+        "PRIVATE_EVENT": {
+          "$id": "#/properties/PRIVATE_EVENT",
+          "type": "string",
+          "title": "PRIVATE_EVENT"
+        },
+        "RRULE": {
+          "$id": "#/properties/RRULE",
+          "type": "string",
+          "title": "RRULE"
+        },
+        "IS_MEETING": {
+          "$id": "#/properties/IS_MEETING",
+          "type": "string",
+          "title": "IS_MEETING"
+        },
+        "LOCATION": {
+          "$id": "#/properties/LOCATION",
+          "type": "string",
+          "title": "LOCATION"
+        },
+        "REMIND": {
+          "$id": "#/properties/REMIND",
+          "type": "string",
+          "title": "REMIND"
+        },
+        "ATTENDEES_CODES": {
+          "$id": "#/properties/ATTENDEES_CODES",
+          "type": "string",
+          "title": "ATTENDEES_CODES"
+        },
+        "MEETING_HOST": {
+          "$id": "#/properties/MEETING_HOST",
+          "type": "string",
+          "title": "MEETING_HOST"
+        },
+        "MEETING": {
+          "$id": "#/properties/MEETING",
+          "type": "string",
+          "title": "MEETING"
         }
       }
     },
@@ -3653,14 +3052,14 @@
         }
       }
     },
-    "CalendarMeetingListResponse": {
+    "CalendarSectionGetResponse": {
       "type": "object",
       "properties": {
         "result": {
-          "title": "Список переговорных",
+          "title": "Список календарей",
           "additionalItems": true,
           "items": {
-            "$ref": "#/definitions/CalendarMeeting"
+            "$ref": "#/definitions/CalendarSection"
           }
         },
         "status": {
@@ -3673,11 +3072,15 @@
         }
       }
     },
-    "CalendarMeetingRoomResponse": {
+    "CalendarEventGetResponse": {
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/CalendarMeetingRoom"
+          "title": "Список календарей",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/CalendarEvent"
+          }
         },
         "status": {
           "type": "string",
