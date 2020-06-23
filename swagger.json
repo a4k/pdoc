@@ -2539,8 +2539,17 @@
       "title": "Уведомление",
       "additionalProperties": true,
       "properties": {
-        "TITLE": {
-          "$id": "#/properties/TITLE",
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "string",
+          "title": "Тема",
+          "default": "",
+          "examples": [
+            "Идентификатор уведомления"
+          ]
+        },
+        "NAME": {
+          "$id": "#/properties/NAME",
           "type": "string",
           "title": "Тема",
           "default": "",
@@ -2560,7 +2569,7 @@
           "title": "Категория уведомления",
           "description": "Категория уведомления"
         },
-        "UPDATE_TIME": {
+        "TIMESTAMP_X": {
           "type": "integer",
           "title": "Дата создания",
           "description": "Дата создания уведомления, unix-time",
