@@ -2626,25 +2626,9 @@
         "STATUS": {
           "type": "integer",
           "title": "Статус задачи.",
-          "description": "0 - Running;1 - CompleteYes;2 - CompleteNo;3 - CompleteOk;4 - Timeout;5 - CompleteCancel;",
+          "description": "0 - Running;1 - CompleteYes;2 - CompleteNo;3 - CompleteOk",
           "examples": [
             1
-          ]
-        },
-        "USER_STATUS": {
-          "type": "integer",
-          "title": "Статус задачи пользователя.",
-          "description": "0 - Waiting;1 - Yes;2 - No;3 - Ok;4 - Cancel;",
-          "examples": [
-            1
-          ]
-        },
-        "WORKFLOW_ID": {
-          "$id": "#/properties/WORKFLOW_ID",
-          "type": "string",
-          "title": "Идентификатор рабочей области",
-          "examples": [
-            "78sdf8734ji2"
           ]
         },
         "DOCUMENT_URL": {
