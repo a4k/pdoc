@@ -2716,12 +2716,12 @@
         },
         "TEXT_COLOR": {
           "$id": "#/properties/TEXT_COLOR",
-          "title": "TEXT_COLOR",
+          "title": "Цвет текста календаря.",
           "type": "string"
         },
         "OWNER_ID": {
           "$id": "#/properties/OWNER_ID",
-          "title": "OWNER_ID",
+          "title": "Идентификатор владельца календаря.",
           "type": "string"
         }
       }
@@ -2735,97 +2735,101 @@
         "ID": {
           "$id": "#/properties/ID",
           "type": "string",
-          "title": "ID"
+          "title": "Идентификатор события"
         },
         "OWNER_ID": {
           "$id": "#/properties/OWNER_ID",
           "type": "string",
-          "title": "OWNER_ID"
+          "title": "Идентификатор владельца календаря."
         },
         "DATE_FROM_TS_UTC": {
           "$id": "#/properties/DATE_FROM_TS_UTC",
           "type": "string",
-          "title": "DATE_FROM_TS_UTC"
+          "title": "Дата начала выборки. unix-time"
         },
         "DATE_TO_TS_UTC": {
           "$id": "#/properties/DATE_TO_TS_UTC",
           "type": "string",
-          "title": "DATE_TO_TS_UTC"
+          "title": "Дата окончания выборки.unix-time"
         },
         "SECT_ID": {
           "$id": "#/properties/SECT_ID",
           "type": "string",
-          "title": "SECT_ID"
+          "title": "Идентификатор раздела."
         },
         "NAME": {
           "$id": "#/properties/NAME",
           "type": "string",
-          "title": "NAME"
+          "title": "Наименование события."
         },
         "DT_SKIP_TIME": {
           "$id": "#/properties/DT_SKIP_TIME",
           "type": "string",
-          "title": "DT_SKIP_TIME"
+          "title": "[Y|N] Указывает, что значение даты передается без времени."
         },
         "COLOR": {
           "$id": "#/properties/COLOR",
           "type": "string",
-          "title": "COLOR"
+          "title": "Цвет фона события."
         },
         "TEXT_COLOR": {
           "$id": "#/properties/TEXT_COLOR",
           "type": "string",
-          "title": "TEXT_COLOR"
+          "title": "Цвет текста события."
         },
         "ACCESSIBILITY": {
           "$id": "#/properties/ACCESSIBILITY",
           "type": "string",
-          "title": "ACCESSIBILITY"
+          "title": "Доступность на время события",
+          "description": "busy (занят);absent (отсутствую);quest (под вопросом);free (свободен)."
         },
         "IMPORTANCE": {
           "$id": "#/properties/IMPORTANCE",
           "type": "string",
-          "title": "IMPORTANCE"
+          "title": "Важность события",
+          "description": "high (высокая);normal (средняя);low (низкая)."
         },
         "PRIVATE_EVENT": {
           "$id": "#/properties/PRIVATE_EVENT",
           "type": "string",
-          "title": "PRIVATE_EVENT"
+          "title": "[Y|N] Отметка частного события."
         },
         "RRULE": {
           "$id": "#/properties/RRULE",
           "type": "string",
-          "title": "RRULE"
+          "title": "Повторяемость события."
         },
         "IS_MEETING": {
           "$id": "#/properties/IS_MEETING",
           "type": "string",
-          "title": "IS_MEETING"
+          "title": "[Y|N] Признак встречи с участниками события."
         },
         "LOCATION": {
           "$id": "#/properties/LOCATION",
           "type": "string",
-          "title": "LOCATION"
+          "title": "Место проведения."
         },
         "REMIND": {
           "$id": "#/properties/REMIND",
           "type": "string",
-          "title": "REMIND"
+          "title": "Напоминание о событии:",
+          "description": "type - временной тип напоминания (min, hour, day);count - числовое значение временного промежутка."
         },
         "ATTENDEES_CODES": {
           "$id": "#/properties/ATTENDEES_CODES",
           "type": "string",
-          "title": "ATTENDEES_CODES"
+          "title": "Список участников события (если is_meeting == 'Y')."
         },
         "MEETING_HOST": {
           "$id": "#/properties/MEETING_HOST",
           "type": "string",
-          "title": "MEETING_HOST"
+          "title": "Организатор события."
         },
         "MEETING": {
           "$id": "#/properties/MEETING",
           "type": "string",
-          "title": "MEETING"
+          "title": "Массив параметров, включающий в себя:",
+          "description": "text - текст приглашения;open - признак открытой встречи;notify - флаг оповещения о подтверждении,отказе участников;reinvite - флаг запроса повторного подтверждения участия (при редактировании события)."
         }
       }
     },
