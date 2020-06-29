@@ -2686,6 +2686,18 @@
           "type": "string",
           "title": "Выводимое название кнопки",
           "default": ""
+        },
+        "MODAL_TITLE": {
+          "$id": "#/properties/MODAL_TITLE",
+          "type": "string",
+          "title": "Название окна после нажатия на кнопку",
+          "default": ""
+        },
+        "MODAL_CONTENT": {
+          "$id": "#/properties/MODAL_CONTENT",
+          "type": "string",
+          "title": "Описание окна после нажатия на кнопку",
+          "default": ""
         }
       }
     },
