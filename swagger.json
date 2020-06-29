@@ -2634,7 +2634,11 @@
         "DOCUMENT_URL": {
           "$id": "#/properties/DOCUMENT_URL",
           "type": "array",
-          "title": "ссылка на документ (pdf)"
+          "title": "Документы",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/TaskDocument"
+          }
         },
         "BUTTONS": {
           "$id": "#/properties/BUTTONS",
@@ -2644,6 +2648,25 @@
           "items": {
             "$ref": "#/definitions/TaskButton"
           }
+        }
+      }
+    },
+    "TaskDocument": {
+      "type": "object",
+      "title": "Документы задачи TaskDocument",
+      "additionalProperties": true,
+      "properties": {
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Название документа",
+          "default": ""
+        },
+        "URL": {
+          "$id": "#/properties/URL",
+          "type": "string",
+          "title": "Ссылка на документ",
+          "default": ""
         }
       }
     },
