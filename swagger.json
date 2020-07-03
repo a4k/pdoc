@@ -2330,27 +2330,40 @@
           "title": "UUID обьекта",
           "default": 1
         },
-        "STATUS": {
-          "$id": "#/properties/STATUS",
+        "NAME": {
+          "$id": "#/properties/NAME",
           "type": "string",
-          "title": "Статус",
-          "description": "статус документа: pending - в ожидании, completed - исполненный",
-          "default": ""
+          "title": "Название документа"
         },
-        "XML_ID": {
-          "$id": "#/properties/XML_ID",
+        "DESCRIPTION": {
+          "$id": "#/properties/DESCRIPTION",
           "type": "string",
-          "title": "Идентификатор документа в компании",
-          "default": ""
+          "title": "Описание документа"
+        },
+        "FILES": {
+          "$id": "#/properties/FILES",
+          "type": "array",
+          "title": "Файлы документа",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentFile"
+          }
         },
         "FIELDS": {
           "$id": "#/properties/FIELDS",
           "type": "array",
-          "title": "Поля документа DocumentField",
+          "title": "Поля документа",
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/DocumentField"
           }
+        },
+        "COMPLETED": {
+          "$id": "#/properties/COMPLETED",
+          "type": "string",
+          "title": "Статус выполненности документа",
+          "description": "статус документа: Y - выполнен, N - не выполнен",
+          "default": "N"
         },
         "UPDATE_TIME": {
           "type": "integer",
@@ -2359,32 +2372,49 @@
         }
       }
     },
-    "DocumentField": {
+    "DocumentFile": {
       "type": "object",
-      "title": "Поле документы DocumentField",
+      "title": "Файл документа",
       "additionalProperties": true,
       "properties": {
-        "ID": {
-          "$id": "#/properties/ID",
+        "NAME": {
+          "$id": "#/properties/NAME",
           "type": "string",
-          "title": "UUID обьекта",
-          "default": 1
+          "title": "Название файла"
         },
-        "PATTERN": {
-          "$ref": "#/definitions/DocumentPatternField"
+        "URL": {
+          "$id": "#/properties/URL",
+          "type": "string",
+          "title": "Ссылка на файл"
+        }
+      }
+    },
+    "DocumentField": {
+      "type": "object",
+      "title": "Поле документа",
+      "additionalProperties": true,
+      "properties": {
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Уникальное имя поля"
+        },
+        "TITLE": {
+          "$id": "#/properties/TITLE",
+          "type": "string",
+          "title": "Название поля"
         },
         "VALUE": {
           "$id": "#/properties/VALUE",
           "type": "string",
           "title": "Значение поля",
-          "description": "для type: number/dateTime - double, checkBox - boolean, list/flag - [string], period - [double], остальных - string",
           "default": ""
         }
       }
     },
     "DocumentPattern": {
       "type": "object",
-      "title": "Шаблон документа DocumentPattern",
+      "title": "Шаблон документа",
       "additionalProperties": true,
       "properties": {
         "ID": {
@@ -2574,6 +2604,16 @@
           "title": "Дата создания",
           "description": "Дата создания уведомления, unix-time",
           "default": 1525735820
+        },
+        "NOTIFY_READ": {
+          "$id": "#/properties/NOTIFY_READ",
+          "type": "string",
+          "title": "Статус уведомления Y - прочитано, N - не прочитано"
+        },
+        "NOTIFY_BUTTONS": {
+          "$id": "#/properties/NOTIFY_BUTTONS",
+          "type": "array",
+          "title": "Массив кнопок"
         }
       }
     },
@@ -2606,8 +2646,8 @@
             "Исполнитель 50 шт"
           ]
         },
-        "MODIFIED": {
-          "$id": "#/properties/MODIFIED",
+        "UPDATE_TIME": {
+          "$id": "#/properties/UPDATE_TIME",
           "type": "integer",
           "title": "Дата изменения элемента",
           "examples": [
@@ -2621,14 +2661,6 @@
           "enum": ["Y", "N"],
           "examples": [
             "Y"
-          ]
-        },
-        "STATUS": {
-          "type": "integer",
-          "title": "Статус задачи.",
-          "description": "0 - Running;1 - CompleteYes;2 - CompleteNo;3 - CompleteOk",
-          "examples": [
-            1
           ]
         },
         "DOCUMENT_URL": {
