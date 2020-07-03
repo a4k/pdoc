@@ -1458,6 +1458,12 @@
                   "examples": [
                     1525735820
                   ]
+                },
+                "CATEGORY": {
+                  "name": "CATEGORY",
+                  "in": "query",
+                  "description": "Категория уведомления",
+                  "type": "string"
                 }
               }
             }
