@@ -2341,11 +2341,6 @@
           "type": "string",
           "title": "Название документа"
         },
-        "DESCRIPTION": {
-          "$id": "#/properties/DESCRIPTION",
-          "type": "string",
-          "title": "Описание документа"
-        },
         "FILES": {
           "$id": "#/properties/FILES",
           "type": "array",
@@ -2400,15 +2395,19 @@
       "title": "Поле документа",
       "additionalProperties": true,
       "properties": {
-        "NAME": {
-          "$id": "#/properties/NAME",
+        "ID": {
+          "$id": "#/properties/ID",
           "type": "string",
           "title": "Уникальное имя поля"
         },
-        "TITLE": {
-          "$id": "#/properties/TITLE",
-          "type": "string",
-          "title": "Название поля"
+        "PATTERN": {
+          "$id": "#/properties/PATTERN",
+          "type": "array",
+          "title": "Шаблонные поля документа DocumentPatternField",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentPatternField"
+          }
         },
         "VALUE": {
           "$id": "#/properties/VALUE",
@@ -2460,7 +2459,7 @@
     },
     "DocumentPatternField": {
       "type": "object",
-      "title": "Поле шаблона документа DocumentPatternField",
+      "title": "Поле шаблона документа",
       "additionalProperties": true,
       "properties": {
         "NAME": {
@@ -2497,43 +2496,7 @@
         "AVAILABLE_VALUES": {
           "$id": "#/properties/AVAILABLE_VALUES",
           "type": "array",
-          "title": "Массив доступных значений поля, может быть пустым",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/DocumentFieldData"
-          }
-        },
-        "DATA": {
-          "$id": "#/properties/DATA",
-          "type": "array",
-          "title": "Описание поля",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/DocumentFieldData"
-          }
-        }
-      }
-    },
-    "DocumentFieldData": {
-      "type": "object",
-      "title": "Поле дополнительного поля документа DocumentFieldData",
-      "additionalProperties": true,
-      "properties": {
-        "NAME": {
-          "$id": "#/properties/NAME",
-          "type": "string",
-          "title": "Тип опции поля",
-          "default": "",
-          "description": "Доступные значения defaultValue, errorValue, minValue, maxValue, rowValue, colValue, noteValue, regexpValue, enableTime, multiple(true, false), required (true, false)",
-          "examples": [
-            "defaultValue", "errorValue", "minValue", "maxValue", "rowValue", "colValue", "noteValue", "regexpValue", "multiple", "required"
-          ]
-        },
-        "VALUE": {
-          "$id": "#/properties/VALUE",
-          "type": "string",
-          "title": "Значение опции. Обычная строка",
-          "default": ""
+          "title": "Массив доступных значений поля, может быть пустым"
         }
       }
     },
