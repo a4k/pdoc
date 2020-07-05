@@ -987,7 +987,7 @@
         "tags": [
           "calendar"
         ],
-        "summary": "Список календарей",
+        "summary": "Список Переговорных",
         "description": "",
         "parameters": [{
           "name": "auth",
@@ -1023,7 +1023,7 @@
         "tags": [
           "calendar"
         ],
-        "summary": "Список событий календаря",
+        "summary": "Список событий переговорки",
         "description": "",
         "parameters": [{
           "in": "body",
@@ -1033,8 +1033,8 @@
           "schema": {
             "type": "object",
             "properties": {
-              "from": {
-                "name": "from",
+              "FROM": {
+                "name": "FROM",
                 "in": "query",
                 "description": "Дата (unix-время) начала",
                 "type": "integer",
@@ -1042,8 +1042,8 @@
                   1525735820
                 ]
               },
-              "to": {
-                "name": "to",
+              "TO": {
+                "name": "TO",
                 "in": "query",
                 "description": "Дата (unix-время) завершения",
                 "type": "integer",
@@ -1051,8 +1051,8 @@
                   1525735820
                 ]
               },
-              "ownerId": {
-                "name": "ownerId",
+              "OWNER_ID": {
+                "name": "OWNER_ID",
                 "in": "query",
                 "description": "идентификатор владельца календаря",
                 "type": "integer",
@@ -1106,100 +1106,41 @@
           "schema": {
             "type": "object",
             "properties": {
-              "ownerId": {
-                "name": "ownerId",
+              "OWNER_ID": {
+                "name": "OWNER_ID",
                 "type": "string",
-                "in": "query"
+                "in": "query",
+                "description": "Идентификатор владельца календаря"
               },
-              "from": {
-                "name": "from",
+              "SECTION_ID": {
+                "name": "SECTION_ID",
                 "type": "string",
-                "in": "query"
+                "in": "query",
+                "description": "Идентификатор переговорки"
               },
-              "to": {
-                "name": "to",
-                "type": "string",
-                "in": "query"
+              "FROM": {
+                "name": "FROM",
+                "type": "integer",
+                "in": "query",
+                "description": "Дата (unix-время) начала"
               },
-              "section": {
-                "name": "section",
-                "type": "string",
-                "in": "query"
+              "TO": {
+                "name": "TO",
+                "type": "integer",
+                "in": "query",
+                "description": "Дата (unix-время) завершения"
               },
-              "name": {
-                "name": "name",
+              "NAME": {
+                "name": "NAME",
                 "type": "string",
-                "in": "query"
+                "in": "query",
+                "description": "Название события"
               },
-              "skip_time": {
-                "name": "skip_time",
-                "type": "string",
-                "in": "query"
-              },
-              "description": {
-                "name": "description",
-                "type": "string",
-                "in": "query"
-              },
-              "color": {
-                "name": "color",
-                "type": "string",
-                "in": "query"
-              },
-              "text_color": {
-                "name": "text_color",
-                "type": "string",
-                "in": "query"
-              },
-              "accessibility": {
-                "name": "accessibility",
-                "type": "string",
-                "in": "query"
-              },
-              "importance": {
-                "name": "importance",
-                "type": "string",
-                "in": "query"
-              },
-              "private_event": {
-                "name": "private_event",
-                "type": "string",
-                "in": "query"
-              },
-              "rrule": {
-                "name": "rrule",
-                "type": "string",
-                "in": "query"
-              },
-              "is_meeting": {
-                "name": "is_meeting",
-                "type": "string",
-                "in": "query"
-              },
-              "location": {
-                "name": "location",
-                "type": "string",
-                "in": "query"
-              },
-              "remind": {
-                "name": "remind",
-                "type": "string",
-                "in": "query"
-              },
-              "attendees": {
-                "name": "attendees",
-                "type": "string",
-                "in": "query"
-              },
-              "host": {
-                "name": "host",
-                "type": "string",
-                "in": "query"
-              },
-              "meeting": {
-                "name": "meeting",
-                "type": "string",
-                "in": "query"
+              "ATTENDEES": {
+                "name": "ATTENDEES",
+                "type": "array",
+                "in": "query",
+                "description": "Список участников - Массив идентификаторов пользователей"
               }
             }
           }
@@ -1247,105 +1188,47 @@
           "schema": {
             "type": "object",
             "properties": {
-              "id": {
-                "name": "id",
+              "ID": {
+                "name": "ID",
                 "type": "string",
-                "in": "query"
+                "in": "query",
+                "description": "Идентификатор события"
               },
-              "ownerId": {
-                "name": "ownerId",
+              "OWNER_ID": {
+                "name": "OWNER_ID",
                 "type": "string",
-                "in": "query"
+                "in": "query",
+                "description": "Идентификатор владельца календаря"
               },
-              "from": {
-                "name": "from",
+              "SECTION_ID": {
+                "name": "SECTION_ID",
                 "type": "string",
-                "in": "query"
+                "in": "query",
+                "description": "Идентификатор переговорки"
               },
-              "to": {
-                "name": "to",
-                "type": "string",
-                "in": "query"
+              "FROM": {
+                "name": "FROM",
+                "type": "integer",
+                "in": "query",
+                "description": "Дата (unix-время) начала"
               },
-              "section": {
-                "name": "section",
-                "type": "string",
-                "in": "query"
+              "TO": {
+                "name": "TO",
+                "type": "integer",
+                "in": "query",
+                "description": "Дата (unix-время) завершения"
               },
-              "name": {
-                "name": "name",
+              "NAME": {
+                "name": "NAME",
                 "type": "string",
-                "in": "query"
+                "in": "query",
+                "description": "Название события"
               },
-              "skip_time": {
-                "name": "skip_time",
-                "type": "string",
-                "in": "query"
-              },
-              "description": {
-                "name": "description",
-                "type": "string",
-                "in": "query"
-              },
-              "color": {
-                "name": "color",
-                "type": "string",
-                "in": "query"
-              },
-              "text_color": {
-                "name": "text_color",
-                "type": "string",
-                "in": "query"
-              },
-              "accessibility": {
-                "name": "accessibility",
-                "type": "string",
-                "in": "query"
-              },
-              "importance": {
-                "name": "importance",
-                "type": "string",
-                "in": "query"
-              },
-              "private_event": {
-                "name": "private_event",
-                "type": "string",
-                "in": "query"
-              },
-              "rrule": {
-                "name": "rrule",
-                "type": "string",
-                "in": "query"
-              },
-              "is_meeting": {
-                "name": "is_meeting",
-                "type": "string",
-                "in": "query"
-              },
-              "location": {
-                "name": "location",
-                "type": "string",
-                "in": "query"
-              },
-              "remind": {
-                "name": "remind",
-                "type": "string",
-                "in": "query"
-              },
-              "attendees": {
-                "name": "attendees",
-                "type": "string",
-                "in": "query"
-              },
-              "host": {
-                "name": "host",
-                "type": "string",
-                "in": "query"
-              },
-              "meeting": {
-                "name": "meeting",
-                "type": "string",
-                "in": "query"
+              "ATTENDEES": {
+                "name": "ATTENDEES",
+                "type": "array",
+                "in": "query",
+                "description": "Список участников - Массив идентификаторов пользователей"
               }
             }
           }
@@ -1393,16 +1276,10 @@
           "schema": {
             "type": "object",
             "properties": {
-              "id": {
-                "name": "id",
+              "ID": {
+                "name": "ID",
                 "in": "query",
                 "description": "Идентификатор события",
-                "type": "string"
-              },
-              "ownerId": {
-                "name": "ownerId",
-                "in": "query",
-                "description": "Идентификатор владельца календаря",
                 "type": "string"
               }
             }
@@ -2424,7 +2301,7 @@
       "properties": {
         "ID": {
           "$id": "#/properties/ID",
-          "type": "number",
+          "type": "integer",
           "title": "Идентификатор шаблона"
         },
         "TITLE": {
@@ -2654,7 +2531,7 @@
     },
     "TaskDocument": {
       "type": "object",
-      "title": "Документы задачи TaskDocument",
+      "title": "Документы задачи",
       "additionalProperties": true,
       "properties": {
         "NAME": {
@@ -2673,7 +2550,7 @@
     },
     "TaskButton": {
       "type": "object",
-      "title": "Кнопка задачи TaskButton",
+      "title": "Кнопка задачи",
       "additionalProperties": true,
       "properties": {
         "NAME": {
@@ -2704,12 +2581,12 @@
     },
     "CalendarSection": {
       "type": "object",
-      "title": "Календарь",
+      "title": "Переговорная",
       "additionalProperties": true,
       "properties": {
         "ID": {
           "$id": "#/properties/ID",
-          "title": "Идентификатор календаря.",
+          "title": "Идентификатор переговорной.",
           "type": "string"
         },
         "NAME": {
@@ -2722,29 +2599,38 @@
           "title": "Описание",
           "type": "string"
         },
-        "COLOR": {
-          "$id": "#/properties/COLOR",
-          "title": "Цвет календаря.",
-          "type": "string"
-        },
-        "TEXT_COLOR": {
-          "$id": "#/properties/TEXT_COLOR",
-          "title": "Цвет текста календаря.",
-          "type": "string"
-        },
         "OWNER_ID": {
           "$id": "#/properties/OWNER_ID",
           "title": "Идентификатор владельца календаря.",
+          "type": "string"
+        },
+        "UF_EMAIL": {
+          "$id": "#/properties/UF_EMAIL",
+          "title": "Почта переговорной",
+          "type": "string"
+        },
+        "UF_FLOOR": {
+          "$id": "#/properties/UF_FLOOR",
+          "title": "Этаж",
+          "type": "string"
+        },
+        "UF_PHONE": {
+          "$id": "#/properties/UF_PHONE",
+          "title": "Телефон",
+          "type": "string"
+        },
+        "UF_PLACE": {
+          "$id": "#/properties/UF_PLACE",
+          "title": "Количество мест",
           "type": "string"
         }
       }
     },
     "CalendarEvent": {
       "type": "object",
-      "title": "Список событий календаря",
+      "title": "Список событий переговорной",
       "additionalProperties": true,
       "properties": {
-        
         "ID": {
           "$id": "#/properties/ID",
           "type": "string",
@@ -2755,94 +2641,76 @@
           "type": "string",
           "title": "Идентификатор владельца календаря."
         },
-        "DATE_FROM_TS_UTC": {
-          "$id": "#/properties/DATE_FROM_TS_UTC",
+        "SECTION_ID": {
+          "$id": "#/properties/SECTION_ID",
+          "type": "string",
+          "title": "Идентификатор переговорной."
+        },
+        "FROM": {
+          "$id": "#/properties/FROM",
           "type": "string",
           "title": "Дата начала выборки. unix-time"
         },
-        "DATE_TO_TS_UTC": {
-          "$id": "#/properties/DATE_TO_TS_UTC",
+        "TO": {
+          "$id": "#/properties/TO",
           "type": "string",
           "title": "Дата окончания выборки.unix-time"
-        },
-        "SECT_ID": {
-          "$id": "#/properties/SECT_ID",
-          "type": "string",
-          "title": "Идентификатор раздела."
         },
         "NAME": {
           "$id": "#/properties/NAME",
           "type": "string",
           "title": "Наименование события."
         },
-        "DT_SKIP_TIME": {
-          "$id": "#/properties/DT_SKIP_TIME",
+        "ATTENDEES": {
+          "$id": "#/properties/ATTENDEES",
+          "type": "array",
+          "title": "Участники события",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/EventAttendees"
+          }
+        }
+      }
+    },
+    "EventAttendees": {
+      "type": "object",
+      "title": "Участник события",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
           "type": "string",
-          "title": "[Y|N] Указывает, что значение даты передается без времени."
+          "title": "Идентификатор пользователя"
         },
-        "COLOR": {
-          "$id": "#/properties/COLOR",
+        "NAME": {
+          "$id": "#/properties/NAME",
           "type": "string",
-          "title": "Цвет фона события."
+          "title": "Имя "
         },
-        "TEXT_COLOR": {
-          "$id": "#/properties/TEXT_COLOR",
+        "LAST_NAME": {
+          "$id": "#/properties/LAST_NAME",
           "type": "string",
-          "title": "Цвет текста события."
+          "title": "Фамилия"
         },
-        "ACCESSIBILITY": {
-          "$id": "#/properties/ACCESSIBILITY",
+        "SECOND_NAME": {
+          "$id": "#/properties/SECOND_NAME",
           "type": "string",
-          "title": "Доступность на время события",
-          "description": "busy (занят);absent (отсутствую);quest (под вопросом);free (свободен)."
+          "title": "Отчество"
         },
-        "IMPORTANCE": {
-          "$id": "#/properties/IMPORTANCE",
+        "EMAIL": {
+          "$id": "#/properties/EMAIL",
           "type": "string",
-          "title": "Важность события",
-          "description": "high (высокая);normal (средняя);low (низкая)."
+          "title": "Почта"
         },
-        "PRIVATE_EVENT": {
-          "$id": "#/properties/PRIVATE_EVENT",
+        "PERSONAL_PHOTO": {
+          "$id": "#/properties/PERSONAL_PHOTO",
           "type": "string",
-          "title": "[Y|N] Отметка частного события."
+          "title": "Фотография - ссылка"
         },
-        "RRULE": {
-          "$id": "#/properties/RRULE",
+        "FORMATTED_NAME": {
+          "$id": "#/properties/FORMATTED_NAME",
           "type": "string",
-          "title": "Повторяемость события."
-        },
-        "IS_MEETING": {
-          "$id": "#/properties/IS_MEETING",
-          "type": "string",
-          "title": "[Y|N] Признак встречи с участниками события."
-        },
-        "LOCATION": {
-          "$id": "#/properties/LOCATION",
-          "type": "string",
-          "title": "Место проведения."
-        },
-        "REMIND": {
-          "$id": "#/properties/REMIND",
-          "type": "string",
-          "title": "Напоминание о событии:",
-          "description": "type - временной тип напоминания (min, hour, day);count - числовое значение временного промежутка."
-        },
-        "ATTENDEES_CODES": {
-          "$id": "#/properties/ATTENDEES_CODES",
-          "type": "string",
-          "title": "Список участников события (если is_meeting == 'Y')."
-        },
-        "MEETING_HOST": {
-          "$id": "#/properties/MEETING_HOST",
-          "type": "string",
-          "title": "Организатор события."
-        },
-        "MEETING": {
-          "$id": "#/properties/MEETING",
-          "type": "string",
-          "title": "Массив параметров, включающий в себя:",
-          "description": "text - текст приглашения;open - признак открытой встречи;notify - флаг оповещения о подтверждении,отказе участников;reinvite - флаг запроса повторного подтверждения участия (при редактировании события)."
+          "title": "Форматированное имя"
         }
       }
     },
