@@ -849,7 +849,7 @@
           "description": "json",
           "required": true,
           "schema": {
-            "$ref": "#/definitions/DocumentPattern"
+            "$ref": "#/definitions/AddDocumentPattern"
           }
         }, {
           "name": "auth",
@@ -987,7 +987,7 @@
         "tags": [
           "calendar"
         ],
-        "summary": "Список Переговорных",
+        "summary": "Список переговорных",
         "description": "",
         "parameters": [{
           "name": "auth",
@@ -2294,6 +2294,63 @@
         }
       }
     },
+    "AddDocumentPattern": {
+      "type": "object",
+      "title": "Шаблон создания документа",
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "$id": "#/properties/ID",
+          "type": "integer",
+          "title": "Идентификатор шаблона"
+        },
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Название",
+          "default": "",
+          "examples": [
+            "Название документа"
+          ]
+        },
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип документа",
+          "description": "request - заявка, certificate - справка, application - заявление",
+          "default": "",
+          "examples": [
+            "request", "certificate", "application"
+          ]
+        },
+        "FIELDS": {
+          "$id": "#/properties/FIELDS",
+          "type": "array",
+          "title": "Шаблонные поля документа",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/AddDocumentPatternField"
+          }
+        }
+      }
+    },
+    "AddDocumentPatternField": {
+      "type": "object",
+      "title": "Поле шаблона документа",
+      "additionalProperties": true,
+      "properties": {
+        "NAME": {
+          "$id": "#/properties/NAME",
+          "type": "string",
+          "title": "Идентификатор поля"
+        },
+        "VALUE": {
+          "$id": "#/properties/VALUE",
+          "type": "string",
+          "title": "Значение поля. Строка или массив"
+        }
+      }
+    },
     "DocumentPattern": {
       "type": "object",
       "title": "Шаблон документа",
@@ -2326,7 +2383,7 @@
         "FIELDS": {
           "$id": "#/properties/FIELDS",
           "type": "array",
-          "title": "Шаблонные поля документа DocumentPatternField",
+          "title": "Шаблонные поля документа",
           "additionalItems": true,
           "items": {
             "$ref": "#/definitions/DocumentPatternField"
