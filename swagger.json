@@ -1138,9 +1138,13 @@
               },
               "ATTENDEES": {
                 "name": "ATTENDEES",
-                "type": "array",
                 "in": "query",
-                "description": "Список участников - Массив идентификаторов пользователей"
+                "title": "Список участников",
+                "type": "array",
+                "additionalItems": true,
+                "items": {
+                  "$ref": "#/definitions/EventAttendeesFields"
+                }
               }
             }
           }
@@ -1561,6 +1565,21 @@
           "items": {
             "$ref": "#/definitions/AbsenceInfo"
           }
+        }
+      }
+    },
+    "EventAttendeesFields": {
+      "type": "object",
+      "properties": {
+        "TYPE": {
+          "$id": "#/properties/TYPE",
+          "type": "string",
+          "title": "Тип добавления участника: EMAIL или ID"
+        },
+        "VALUE": {
+          "$id": "#/properties/VALUE",
+          "type": "string",
+          "title": "Значение поля"
         }
       }
     },
@@ -2680,6 +2699,16 @@
           "$id": "#/properties/UF_PLACE",
           "title": "Количество мест",
           "type": "string"
+        },
+        "UF_HOUR_START": {
+          "$id": "#/properties/UF_HOUR_START",
+          "title": "Час начала работы переговорной",
+          "type": "integer"
+        },
+        "UF_HOUR_END": {
+          "$id": "#/properties/UF_HOUR_END",
+          "title": "Час завершения работы переговорной",
+          "type": "integer"
         }
       }
     },
