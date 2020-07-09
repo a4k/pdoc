@@ -2237,15 +2237,6 @@
           "type": "string",
           "title": "Название документа"
         },
-        "FILES": {
-          "$id": "#/properties/FILES",
-          "type": "array",
-          "title": "Файлы документа",
-          "additionalItems": true,
-          "items": {
-            "$ref": "#/definitions/DocumentFile"
-          }
-        },
         "FIELDS": {
           "$id": "#/properties/FIELDS",
           "type": "array",
@@ -2266,23 +2257,6 @@
           "type": "integer",
           "title": "Дата создания документа, unix-time",
           "default": 1525735820
-        }
-      }
-    },
-    "DocumentFile": {
-      "type": "object",
-      "title": "Файл документа",
-      "additionalProperties": true,
-      "properties": {
-        "NAME": {
-          "$id": "#/properties/NAME",
-          "type": "string",
-          "title": "Название файла"
-        },
-        "URL": {
-          "$id": "#/properties/URL",
-          "type": "string",
-          "title": "Ссылка на файл"
         }
       }
     },
