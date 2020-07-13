@@ -2412,10 +2412,10 @@
           "type": "string",
           "title": "Тип поля",
           "default": "",
-          "description": "string, text number, flag (массив string, можно выбрать один элемент), checkBox (true/false), list (массив string, можно выбрать массив элементов), dateTime (Unix time), period (Unix time - Unix time), contact (Contact ID), image (URL), document (URL)",
+          "description": "string, text, number, flag (массив string, можно выбрать один элемент), checkbox (true/false), list (массив string, можно выбрать массив элементов), datetime (Unix time), period (Unix time - Unix time), contact (Contact ID), image (URL), document (URL)",
           "examples": [
             "string", "text", "number", "flag",
-            "checkBox", "list", "dateTime",
+            "checkbox", "list", "datetime",
             "period", "contact",
             "image ", "document"
           ]
