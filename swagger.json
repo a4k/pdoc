@@ -2662,7 +2662,7 @@
         "UF_FLOOR": {
           "$id": "#/properties/UF_FLOOR",
           "title": "Этаж",
-          "type": "string"
+          "type": "integer"
         },
         "UF_PHONE": {
           "$id": "#/properties/UF_PHONE",
@@ -2672,7 +2672,7 @@
         "UF_PLACE": {
           "$id": "#/properties/UF_PLACE",
           "title": "Количество мест",
-          "type": "string"
+          "type": "integer"
         },
         "UF_HOUR_START": {
           "$id": "#/properties/UF_HOUR_START",
@@ -2708,12 +2708,12 @@
         },
         "FROM": {
           "$id": "#/properties/FROM",
-          "type": "string",
+          "type": "integer",
           "title": "Дата начала выборки. unix-time"
         },
         "TO": {
           "$id": "#/properties/TO",
-          "type": "string",
+          "type": "integer",
           "title": "Дата окончания выборки.unix-time"
         },
         "NAME": {
