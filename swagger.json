@@ -1218,9 +1218,13 @@
               },
               "ATTENDEES": {
                 "name": "ATTENDEES",
-                "type": "array",
                 "in": "query",
-                "description": "Список участников - Массив идентификаторов пользователей"
+                "title": "Список участников",
+                "type": "array",
+                "additionalItems": true,
+                "items": {
+                  "$ref": "#/definitions/EventAttendeesFields"
+                }
               }
             }
           }
