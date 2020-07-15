@@ -1051,10 +1051,10 @@
                   1525735820
                 ]
               },
-              "OWNER_ID": {
-                "name": "OWNER_ID",
+              "SECTION_ID": {
+                "name": "SECTION_ID",
                 "in": "query",
-                "description": "идентификатор владельца календаря",
+                "description": "идентификатор переговорной",
                 "type": "integer",
                 "examples": [
                   2332
@@ -1106,12 +1106,6 @@
           "schema": {
             "type": "object",
             "properties": {
-              "OWNER_ID": {
-                "name": "OWNER_ID",
-                "type": "string",
-                "in": "query",
-                "description": "Идентификатор владельца календаря"
-              },
               "SECTION_ID": {
                 "name": "SECTION_ID",
                 "type": "string",
@@ -1197,12 +1191,6 @@
                 "type": "string",
                 "in": "query",
                 "description": "Идентификатор события"
-              },
-              "OWNER_ID": {
-                "name": "OWNER_ID",
-                "type": "string",
-                "in": "query",
-                "description": "Идентификатор владельца календаря"
               },
               "SECTION_ID": {
                 "name": "SECTION_ID",
