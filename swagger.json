@@ -2761,6 +2761,20 @@
           "items": {
             "$ref": "#/definitions/EventAttendees"
           }
+        },
+        "PERM": {
+          "$id": "#/properties/PERM",
+          "type": "array",
+          "title": "Привилегии",
+          "additionalProperties": true,
+          "properties": {
+            "EDIT": {
+              "$id": "#/properties/EDIT",
+              "title": "Доступ к редактированию события",
+              "type": "boolean",
+              "default": false
+            }
+          }
         }
       }
     },
