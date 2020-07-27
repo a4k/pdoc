@@ -2365,6 +2365,40 @@
             "request", "certificate", "application"
           ]
         },
+        "SHOW_MODAL": {
+          "$id": "#/properties/SHOW_MODAL",
+          "type": "boolean",
+          "title": "Отображать модальное окно",
+          "default": false
+        },
+        "MODAL": {
+          "$id": "#/properties/MODAL",
+          "type": "object",
+          "title": "Модальное окно",
+          "additionalProperties": true,
+          "properties": {
+            "MODAL_TITLE": {
+              "$id": "#/properties/MODAL_TITLE",
+              "type": "string",
+              "title": "Название модального окна"
+            },
+            "MODAL_CONTENT": {
+              "$id": "#/properties/MODAL_CONTENT",
+              "type": "string",
+              "title": "Описание модального окна"
+            },
+            "BUTTON_APPROVE": {
+              "$id": "#/properties/BUTTON_APPROVE",
+              "type": "string",
+              "title": "Текст кнопки подтвеждения"
+            },
+            "BUTTON_CANCEL": {
+              "$id": "#/properties/BUTTON_CANCEL",
+              "type": "string",
+              "title": "Текст кнопки отмены"
+            }
+          }
+        },
         "FIELDS": {
           "$id": "#/properties/FIELDS",
           "type": "array",
