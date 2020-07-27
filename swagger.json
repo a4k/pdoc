@@ -2764,7 +2764,7 @@
         },
         "PERM": {
           "$id": "#/properties/PERM",
-          "type": "array",
+          "type": "object",
           "title": "Привилегии",
           "additionalProperties": true,
           "properties": {
