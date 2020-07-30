@@ -1124,12 +1124,6 @@
                 "in": "query",
                 "description": "Дата (unix-время) завершения"
               },
-              "NAME": {
-                "name": "NAME",
-                "type": "string",
-                "in": "query",
-                "description": "Название события"
-              },
               "ATTENDEES": {
                 "name": "ATTENDEES",
                 "in": "query",
@@ -1209,12 +1203,6 @@
                 "type": "integer",
                 "in": "query",
                 "description": "Дата (unix-время) завершения"
-              },
-              "NAME": {
-                "name": "NAME",
-                "type": "string",
-                "in": "query",
-                "description": "Название события"
               },
               "ATTENDEES": {
                 "name": "ATTENDEES",
