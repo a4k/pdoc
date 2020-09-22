@@ -2288,10 +2288,10 @@
           "$id": "#/properties/TYPE",
           "type": "string",
           "title": "Тип документа",
-          "description": "request - заявка, certificate - справка, application - заявление",
+          "description": "bizproc - бизнес процес, generatordocs - остальное",
           "default": "",
           "examples": [
-            "request", "certificate", "application"
+            "bizproc", "generatordocs"
           ]
         },
         "FIELDS": {
