@@ -2288,10 +2288,10 @@
           "$id": "#/properties/TYPE",
           "type": "string",
           "title": "Тип документа",
-          "description": "request - заявка, certificate - справка, application - заявление",
+          "description": "bizproc - бизнес процес, generatordocs - остальное",
           "default": "",
           "examples": [
-            "request", "certificate", "application"
+            "bizproc", "generatordocs"
           ]
         },
         "FIELDS": {
@@ -2317,8 +2317,28 @@
         },
         "VALUE": {
           "$id": "#/properties/VALUE",
+          "type": "array",
+          "title": "Значение поля. Строка или массив",
+          "description": "Значение поля. Строка или массив для файлов",
+          "additionalItems": true,
+          "items": {
+            "$ref": "#/definitions/DocumentPatternFieldForFiles"
+          }
+        }
+      }
+    },
+    "DocumentPatternFieldForFiles": {
+      "type": "object",
+      "title": "Поле файла",
+      "additionalProperties": true,
+      "properties": {
+        "NAME": {
           "type": "string",
-          "title": "Значение поля. Строка или массив"
+          "title": "Имя файла (опционально)"
+        },
+        "CONTENT": {
+          "type": "string",
+          "title": "Base64 контент файла"
         }
       }
     },
